@@ -1,5 +1,15 @@
-<?php
+<?php namespace Pulse\Frontend;
 
+use App;
+use BaseController;
+
+/**
+ * CmsController Class
+ *
+ * This controller implements the CMS actions of the visitors (Frontend).
+ *
+ * @package  Pulse\Frontend
+ */
 class CmsController extends BaseController
 {
     /**

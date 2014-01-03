@@ -16,4 +16,4 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('page_{slug}', 'CmsController@showPage');
+Route::get('page_{slug}', 'Pulse\Frontend\CmsController@showPage');

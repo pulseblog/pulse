@@ -1,6 +1,8 @@
-<?php
+<?php namespace Pulse\Frontend;
 
+use TestCase;
 use Mockery as m;
+use App;
 
 class CmsControllerTest extends TestCase
 {
@@ -25,7 +27,7 @@ class CmsControllerTest extends TestCase
         App::instance('Pulse\Cms\PageRepository', $repo);
 
         // Request
-        $this->action('GET', 'CmsController@showPage', ['slug'=>$slug]);
+        $this->action('GET', 'Pulse\Frontend\CmsController@showPage', ['slug'=>$slug]);
 
         // Assertion
         $this->assertTrue($this->client->getResponse()->isOk());
