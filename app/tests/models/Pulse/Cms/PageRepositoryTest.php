@@ -11,6 +11,25 @@ class PageRepositoryTest extends TestCase
         m::close();
     }
 
+    public function testShouldGetAll()
+    {
+        // Set
+        $pagination = 2;
+        $repo = new PageRepository;
+        $page = m::mock('Pulse\Cms\Page');
+        $pageCursor = [];
+
+        // Expectations
+        $page->shouldReceive('paginate')
+            ->once()->with(2)
+            ->andReturn($pageCursor);
+
+        App::instance('Pulse\Cms\Page', $page);
+
+        // Assertion
+        $this->assertEquals($pageCursor, $repo->all($pagination));
+    }
+
     public function testShouldFind()
     {
         // Set

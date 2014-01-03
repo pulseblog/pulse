@@ -20,6 +20,18 @@ class PageRepository
     public $domainObject = 'Pulse\Cms\Page';
 
     /**
+     * Returns all the pages. Paginates results using the $pagination parameter
+     * @param  integer $pagination Pagination value
+     * @return Illuminate\Pagination\Paginator
+     */
+    public function all($pagination)
+    {
+        $page = App::make($this->domainObject);
+
+        return $page::paginate($pagination);
+    }
+
+    /**
      * Finds a Page by the given id
      * @param  integer $id Page id
      * @return Page A Page object or null.
