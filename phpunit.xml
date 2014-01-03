@@ -11,8 +11,8 @@
          syntaxCheck="false"
 >
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./app/tests/</directory>
+        <testsuite name="Model Leyer Tests">
+            <directory>./app/tests/models</directory>
         </testsuite>
     </testsuites>
 </phpunit>

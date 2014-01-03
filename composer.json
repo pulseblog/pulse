@@ -7,6 +7,9 @@
 		"laravel/framework": "4.1.*",
 		"dflydev/markdown": "1.0.*@dev"
 	},
+	"require-dev": {
+		"mockery/mockery": "*"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
