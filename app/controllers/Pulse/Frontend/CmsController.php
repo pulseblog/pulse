@@ -1,6 +1,6 @@
 <?php namespace Pulse\Frontend;
 
-use App;
+use App, Input;
 use BaseController;
 
 /**
@@ -14,12 +14,21 @@ class CmsController extends BaseController
 {
     /**
      * Displays the blog post index for the given page
-     * @param  integer $page The page
      * @return Illuminate\Http\Response
      */
-    public function index($page = 1)
+    public function indexPosts()
     {
+        /**
+         * The page
+         * @var integer
+         */
+        $page = Input::get('page', 1);
 
+        $repo = App::make('Pulse\Cms\PostRepository');
+
+        $posts = $repo->all($page);
+
+        return 'something';
     }
 
     /**
@@ -29,7 +38,15 @@ class CmsController extends BaseController
      */
     public function showPost($slug)
     {
+        $repo = App::make('Pulse\Cms\PostRepository');
 
+        $post = $repo->findBySlug($slug);
+
+        if ($post) {
+            return 'something';
+        } else {
+            App::abort(404);
+        }
     }
 
     /**
