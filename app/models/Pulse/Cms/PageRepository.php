@@ -26,9 +26,9 @@ class PageRepository
      */
     public function all($pagination)
     {
-        $page = App::make($this->domainObject);
+        $instance = App::make($this->domainObject);
 
-        return $page::paginate($pagination);
+        return $instance::paginate($pagination);
     }
 
     /**
@@ -38,9 +38,9 @@ class PageRepository
      */
     public function find($id)
     {
-        $page = App::make($this->domainObject);
+        $instance = App::make($this->domainObject);
 
-        return $page::find($id);
+        return $instance::find($id);
     }
 
     /**
@@ -50,8 +50,8 @@ class PageRepository
      */
     public function findBySlug($slug)
     {
-        $page = App::make($this->domainObject);
+        $instance = App::make($this->domainObject);
 
-        return $page::where('slug', $slug)->first();
+        return $instance::where('slug', $slug)->first();
     }
 }
