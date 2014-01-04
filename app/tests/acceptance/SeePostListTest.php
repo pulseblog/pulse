@@ -21,6 +21,9 @@ class SeePostList extends AcceptanceTestCase {
 
         // Then
         $this->i_should_see_post_list();
+
+        // And
+        $this->i_should_see_post_links();
     }
 
     protected function site_has_posts()
@@ -30,7 +33,7 @@ class SeePostList extends AcceptanceTestCase {
 
         $posts[0] = App::make('Pulse\Cms\Post');
         $posts[0]->title = 'Sample Post A';
-        $posts[0]->slug = 'sample_post_A';
+        $posts[0]->slug = 'sample_post_a';
         $posts[0]->lean_content = 'a sample post a';
         $posts[0]->content = 'the sample post a';
         $posts[0]->author_id = 1;
@@ -61,7 +64,19 @@ class SeePostList extends AcceptanceTestCase {
         $this->assertTrue($this->client->getResponse()->isOk());
 
         $this->assertContains('Sample Post A', $this->client->getResponse()->getContent());
-
         $this->assertContains('Sample Post B', $this->client->getResponse()->getContent());
+    }
+
+    /**
+     * Asserts if user sees links for the posts
+     * @return void
+     */
+    protected function i_should_see_post_links()
+    {
+        $postAUrl = URL::action('Pulse\Frontend\CmsController@showPost', ['slug'=>'sample_post_a']);
+        $postBUrl = URL::action('Pulse\Frontend\CmsController@showPost', ['slug'=>'sample_post_b']);
+
+        $this->assertContains($postAUrl, $this->client->getResponse()->getContent());
+        $this->assertContains($postBUrl, $this->client->getResponse()->getContent());
     }
 }
