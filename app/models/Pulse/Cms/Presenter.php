@@ -43,6 +43,11 @@ class Presenter
             'htmlContent' => $htmlContent
         ];
 
-        return View::make('front.posts._display', $viewVars);
+        // Due to the polymorphy
+        if($this->instance instanceOf Post) {
+            return View::make('front.posts._display', $viewVars);
+        } else {
+            return View::make('front.pages._display', $viewVars);
+        }
     }
 }

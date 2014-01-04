@@ -64,7 +64,10 @@ class CmsController extends Controller
         $page = $repo->findBySlug($slug);
 
         if ($page) {
-            return 'something';
+            $pagePresenter = App::make('Pulse\Cms\Presenter');
+            $pagePresenter->setInstance($page);
+
+            return View::make('front.pages.show', compact('pagePresenter'));
         } else {
             App::abort(404);
         }

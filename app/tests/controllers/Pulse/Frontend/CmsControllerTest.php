@@ -58,9 +58,10 @@ class CmsControllerTest extends TestCase
     public function testShouldShowPage()
     {
         // Definitions
-        $slug = 'the_post_slug';
-        $page = m::mock('Pulse\Cms\Page');
+        $slug = 'the_page_slug';
         $repo = m::mock('Pulse\Cms\PageRepository');
+        $page = App::make('Pulse\Cms\Page');
+        $page->slug = $slug;
 
         // Expectations
         $repo->shouldReceive('findBySlug')

@@ -1,0 +1,1 @@
+{{ $pagePresenter->display() }}

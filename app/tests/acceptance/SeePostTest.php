@@ -14,7 +14,7 @@ class SeePostTest extends AcceptanceTestCase {
     public function testViewRenderedMarkdown()
     {
         // Given
-        $this->site_has_a_post([
+        $this->site_has_post([
             'title' => 'Post With Markdown',
             'slug' => 'post_with_markdown',
             'lean_content' => 'A markdown filled post',
@@ -37,7 +37,7 @@ class SeePostTest extends AcceptanceTestCase {
      * @param  array $data Attributes of the Post
      * @return void
      */
-    protected function site_has_a_post($data)
+    protected function site_has_post($data)
     {
         // Definition
         $post = App::make('Pulse\Cms\Post');
