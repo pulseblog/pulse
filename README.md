@@ -1,6 +1,8 @@
 # pulse
 _A blogging platform made with Laravel_
 
+[![Travis-CI](https://travis-ci.org/Zizaco/pulse.png?branch=master)](https://travis-ci.org/Zizaco/pulse)
+
 ![PulseLogo](https://raw.github.com/Zizaco/pulse/master/app/docs/logo.png)
 
 ## License
