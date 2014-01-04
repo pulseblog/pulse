@@ -36,8 +36,9 @@ class CmsControllerTest extends TestCase
     {
         // Definitions
         $slug = 'the_post_slug';
-        $post = m::mock('Pulse\Cms\Post');
         $repo = m::mock('Pulse\Cms\PostRepository');
+        $post = App::make('Pulse\Cms\Post');
+        $post->slug = $slug;
 
         // Expectations
         $repo->shouldReceive('findBySlug')

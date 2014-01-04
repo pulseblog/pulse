@@ -43,7 +43,7 @@ class CmsController extends Controller
         $post = $repo->findBySlug($slug);
 
         if ($post) {
-            return 'something';
+            return View::make('front.posts.show', compact('post'));
         } else {
             App::abort(404);
         }

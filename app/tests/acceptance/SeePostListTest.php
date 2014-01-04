@@ -11,7 +11,7 @@ class SeePostList extends AcceptanceTestCase {
      * Scenario: Simply visit the home page or post list
      * @return void
      */
-    public function testSimplyVisitList()
+    public function testSimplyVisitPostList()
     {
         // Given
         $this->site_has_posts();
@@ -26,9 +26,14 @@ class SeePostList extends AcceptanceTestCase {
         $this->i_should_see_post_links();
     }
 
+    /**
+     * Creates some sample posts and also mocks the PostRepository in order
+     * to retrieve those sample posts
+     * @return void
+     */
     protected function site_has_posts()
     {
-        // Definitions
+        // Definition
         $posts = array();
 
         $posts[0] = App::make('Pulse\Cms\Post');
