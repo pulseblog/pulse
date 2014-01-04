@@ -1,7 +1,7 @@
 <?php namespace Pulse\Frontend;
 
 use App, Input;
-use BaseController;
+use Controller;
 
 /**
  * CmsController Class
@@ -10,7 +10,7 @@ use BaseController;
  *
  * @package  Pulse\Frontend
  */
-class CmsController extends BaseController
+class CmsController extends Controller
 {
     /**
      * Displays the blog post index for the given page
