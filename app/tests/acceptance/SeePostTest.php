@@ -8,28 +8,6 @@ use Mockery as m;
 class SeePostTest extends AcceptanceTestCase {
 
     /**
-     * Scenario: Simply view a blog post
-     * @return  void
-     */
-    public function testViewPost()
-    {
-        // Given
-        $this->site_has_a_post([
-            'title' => 'Sample Post',
-            'slug' => 'sample_post_slug',
-            'lean_content' => 'a sample post',
-            'content' => 'the sample post full content',
-            'author_id' => 1,
-        ]);
-
-        // When
-        $this->i_visit_url('sample_post_slug');
-
-        // Then
-        $this->i_should_see('the sample post full content');
-    }
-
-    /**
      * Scenario: View rendered markdown of a Post
      * @return  void
      */
