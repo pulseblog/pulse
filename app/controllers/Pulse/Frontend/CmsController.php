@@ -1,6 +1,6 @@
 <?php namespace Pulse\Frontend;
 
-use App, Input;
+use App, Input, View;
 use Controller;
 
 /**
@@ -28,7 +28,7 @@ class CmsController extends Controller
 
         $posts = $repo->all($page);
 
-        return 'something';
+        return View::make('front.posts.index', compact('posts'));
     }
 
     /**

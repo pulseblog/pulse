@@ -1,5 +1,7 @@
 <?php
 
+use Mockery as m;
+
 /**
  * Feature: As an user I would like to see the list of blog posts
  */
@@ -9,7 +11,7 @@ class SeePostList extends AcceptanceTestCase {
      * Scenario: Simply visit the home page or post list
      * @return void
      */
-    public function testFeatSeeHome()
+    public function testSimplyVisitList()
     {
         // Given
         $this->site_has_posts();
@@ -23,6 +25,7 @@ class SeePostList extends AcceptanceTestCase {
 
     protected function site_has_posts()
     {
+        // Definitions
         $posts = array();
 
         $posts[0] = App::make('Pulse\Cms\Post');
@@ -31,7 +34,6 @@ class SeePostList extends AcceptanceTestCase {
         $posts[0]->lean_content = 'a sample post a';
         $posts[0]->content = 'the sample post a';
         $posts[0]->author_id = 1;
-        $posts[0]->save();
 
         $posts[1] = App::make('Pulse\Cms\Post');
         $posts[1]->title = 'Sample Post B';
@@ -39,7 +41,15 @@ class SeePostList extends AcceptanceTestCase {
         $posts[1]->lean_content = 'a sample post b';
         $posts[1]->content = 'the sample post b';
         $posts[1]->author_id = 1;
-        $posts[1]->save();
+
+        $repo = m::mock('Pulse\Cms\PostRepository');
+
+        // Expectations
+        $repo->shouldReceive('all')
+            ->once()->with()
+            ->andReturn($posts);
+
+        App::instance('Pulse\Cms\PostRepository', $repo);
     }
 
     /**
