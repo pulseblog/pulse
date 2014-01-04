@@ -11,11 +11,14 @@
          syntaxCheck="false"
 >
     <testsuites>
-        <testsuite name="Model Layer Tests">
-            <directory>./app/tests/models</directory>
+        <testsuite name="model">
+            <directory suffix=".php">./app/tests/models</directory>
         </testsuite>
-        <testsuite name="Controller Tests">
-            <directory>./app/tests/controllers</directory>
+        <testsuite name="controller">
+            <directory suffix=".php">./app/tests/controllers</directory>
+        </testsuite>
+        <testsuite name="acceptance">
+            <directory suffix=".php">./app/tests/acceptance</directory>
         </testsuite>
     </testsuites>
 </phpunit>
