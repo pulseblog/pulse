@@ -11,7 +11,7 @@ class SeePostTest extends AcceptanceTestCase {
      * Scenario: Simply view a blog post
      * @return  void
      */
-    public function testSimplyVisitPost()
+    public function testViewPost()
     {
         // Given
         $this->site_has_a_post([
@@ -27,6 +27,30 @@ class SeePostTest extends AcceptanceTestCase {
 
         // Then
         $this->i_should_see('the sample post full content');
+    }
+
+    /**
+     * Scenario: View rendered markdown of a Post
+     * @return  void
+     */
+    public function testViewRenderedMarkdown()
+    {
+        // Given
+        $this->site_has_a_post([
+            'title' => 'Post With Markdown',
+            'slug' => 'post_with_markdown',
+            'lean_content' => 'A markdown filled post',
+            'content' => 'A **markdown** _filled_ [post](#)',
+            'author_id' => 1,
+        ]);
+
+        // When
+        $this->i_visit_url('post_with_markdown');
+
+        // Then
+        $this->i_should_see(
+            'A <strong>markdown</strong> <em>filled</em> <a href="#">post</a>'
+        );
     }
 
     /**

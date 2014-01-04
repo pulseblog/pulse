@@ -1,5 +1,7 @@
 <?php namespace Pulse\Cms;
 
+use App, View;
+
 /**
  * Class Presenter
  *
@@ -24,5 +26,23 @@ class Presenter
     public function setInstance(Page $instance)
     {
         $this->instance = $instance;
+    }
+
+    /**
+     * Displays the page instance
+     * @return Illuminate\View\View A view displaying the page
+     */
+    public function display()
+    {
+        $mdParser = App::make('dflydev\markdown\MarkdownExtraParser');
+
+        $htmlContent = $mdParser->transformMarkdown($this->instance->content);
+
+        $viewVars = [
+            'page' => $this->instance,
+            'htmlContent' => $htmlContent
+        ];
+
+        return View::make('front.posts._display', $viewVars);
     }
 }

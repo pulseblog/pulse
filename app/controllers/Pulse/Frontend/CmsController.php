@@ -43,7 +43,10 @@ class CmsController extends Controller
         $post = $repo->findBySlug($slug);
 
         if ($post) {
-            return View::make('front.posts.show', compact('post'));
+            $postPresenter = App::make('Pulse\Cms\Presenter');
+            $postPresenter->setInstance($post);
+
+            return View::make('front.posts.show', compact('postPresenter'));
         } else {
             App::abort(404);
         }
