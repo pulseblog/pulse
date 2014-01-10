@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'mail@example.com', 'name' => 'pulse blog'),
 
 	/*
 	|--------------------------------------------------------------------------

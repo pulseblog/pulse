@@ -55,4 +55,13 @@ class SeePostTest extends AcceptanceTestCase {
 
         App::instance('Pulse\Cms\PostRepository', $repo);
     }
+
+    /**
+     * Closes mockery expectations
+     * @return void
+     */
+    public function tearDown()
+    {
+        m::close();
+    }
 }

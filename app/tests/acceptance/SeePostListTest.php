@@ -66,7 +66,7 @@ class SeePostList extends AcceptanceTestCase {
      */
     protected function i_should_see_post_list()
     {
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $this->assertResponseOk();
 
         $this->assertContains('Sample Post A', $this->client->getResponse()->getContent());
         $this->assertContains('Sample Post B', $this->client->getResponse()->getContent());
@@ -83,5 +83,14 @@ class SeePostList extends AcceptanceTestCase {
 
         $this->assertContains($postAUrl, $this->client->getResponse()->getContent());
         $this->assertContains($postBUrl, $this->client->getResponse()->getContent());
+    }
+
+    /**
+     * Closes mockery expectations
+     * @return void
+     */
+    public function tearDown()
+    {
+        m::close();
     }
 }
