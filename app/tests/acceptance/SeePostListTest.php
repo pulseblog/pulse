@@ -84,4 +84,13 @@ class SeePostList extends AcceptanceTestCase {
         $this->assertContains($postAUrl, $this->client->getResponse()->getContent());
         $this->assertContains($postBUrl, $this->client->getResponse()->getContent());
     }
+
+    /**
+     * Closes mockery expectations
+     * @return void
+     */
+    public function tearDown()
+    {
+        m::close();
+    }
 }
