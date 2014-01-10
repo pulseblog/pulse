@@ -29,7 +29,7 @@ class CmsControllerTest extends TestCase
         $this->action('GET', 'Pulse\Frontend\CmsController@indexPosts', ['page'=>$pagination]);
 
         // Assertion
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $this->assertResponseOk();
     }
 
     public function testShouldShowPost()
@@ -52,7 +52,7 @@ class CmsControllerTest extends TestCase
         $this->action('GET', 'Pulse\Frontend\CmsController@showPost', ['slug'=>$slug]);
 
         // Assertion
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $this->assertResponseOk();
     }
 
     public function testShouldShowPage()
@@ -75,6 +75,6 @@ class CmsControllerTest extends TestCase
         $this->action('GET', 'Pulse\Frontend\CmsController@showPage', ['slug'=>$slug]);
 
         // Assertion
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $this->assertResponseOk();
     }
 }
