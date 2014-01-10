@@ -2,6 +2,14 @@
 
 use Confide, Config, App;
 
+/**
+ * Class Pulse\User\Repository
+ *
+ * This service abstracts some interactions that occurs within Confide and
+ * the Database.
+ *
+ * @package  Pulse\User
+ */
 class Repository
 {
     /**
