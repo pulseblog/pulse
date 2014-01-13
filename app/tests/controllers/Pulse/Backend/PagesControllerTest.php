@@ -134,7 +134,66 @@ class PagesControllerTest extends TestCase
 
     public function testShouldStoreAPage()
     {
-        # code...
+        // Range
+        $page = m::mock('Pulse\Cms\Page[errors]');
+        $page->shouldReceive('errors')
+            ->once()
+            ->andReturn([]);
+
+        $input = [
+            'title' => 'true page',
+            'slug'  => 'true_page',
+        ];
+
+        // Expectations
+        $user = m::mock('Pulse\User\User');
+
+        Confide::shouldReceive('user')
+        ->andReturn($user)
+        ->once();
+
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('createNew')
+            ->with($input, $user)
+            ->once()
+            ->andReturn($page);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('POST', 'Pulse\Backend\PagesController@store', $input);
+    }
+
+    public function testShouldNotStoreAInvalidPage()
+    {
+        // Range
+        $page = m::mock('Pulse\Cms\Page');
+        $page->shouldReceive('errors')
+            ->twice()
+            ->andReturn(['messsage' => 'wrong']);
+
+        $input = [
+            'title' => 'true page',
+            'slug'  => 'true_page',
+        ];
+
+        // Expectations
+        $user = m::mock('Pulse\User\User');
+
+        Confide::shouldReceive('user')
+        ->andReturn($user)
+        ->once();
+
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('createNew')
+            ->with($input, $user)
+            ->once()
+            ->andReturn($page);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('POST', 'Pulse\Backend\PagesController@store', $input);
     }
 
     public function testShouldUpdateAPage()
