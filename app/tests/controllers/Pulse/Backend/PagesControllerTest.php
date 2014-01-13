@@ -29,7 +29,9 @@ class PagesControllerTest extends TestCase
 
     public function testShouldGetCreate()
     {
-        # code...
+        $this->action('GET', 'Pulse\Backend\PagesController@create');
+
+        $this->assertResponseOk();
     }
 
     public function testShouldGetEdit()

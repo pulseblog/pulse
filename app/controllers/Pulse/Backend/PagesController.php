@@ -37,7 +37,7 @@ class PagesController extends Controller {
      */
     public function create()
     {
-        return View::make('pages.create');
+        return View::make('backend.pages.create');
     }
 
     /**
