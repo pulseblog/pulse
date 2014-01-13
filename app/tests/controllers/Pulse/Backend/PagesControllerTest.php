@@ -3,6 +3,8 @@
 use TestCase;
 use Mockery as m;
 use App, Confide, Lang;
+use Pulse\Cms\Page;
+use Redirect;
 
 class PagesControllerTest extends TestCase
 {
@@ -36,7 +38,33 @@ class PagesControllerTest extends TestCase
 
     public function testShouldGetEdit()
     {
-        # code...
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('find')
+        ->with(123456)
+        ->once()
+        ->andReturn(new Page);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('GET', 'Pulse\Backend\PagesController@edit', ['id' => 123456]);
+    }
+
+    public function testShouldNotGetInexistentEdit()
+    {
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('find')
+        ->with(123456)
+        ->once()
+        ->andReturn(null);
+
+        Redirect::shouldReceive('back')
+            ->once();
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('GET', 'Pulse\Backend\PagesController@edit', ['id' => 123456]);
     }
 
     public function testShouldGetShow()

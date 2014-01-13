@@ -1,6 +1,6 @@
 <?php namespace Pulse\Backend;
 
-use Controller, View, Input;
+use Controller, View, Input, Redirect;
 
 class PagesController extends Controller {
 
@@ -69,7 +69,12 @@ class PagesController extends Controller {
      */
     public function edit($id)
     {
-        return View::make('pages.edit');
+        $page = $this->pageRepository->find($id);
+
+        if (! $page)
+            Redirect::back();
+
+        return View::make('backend.pages.edit');
     }
 
     /**
