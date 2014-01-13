@@ -69,7 +69,33 @@ class PagesControllerTest extends TestCase
 
     public function testShouldGetShow()
     {
-        # code...
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('find')
+        ->with(123456)
+        ->once()
+        ->andReturn(new Page);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('GET', 'Pulse\Backend\PagesController@show', ['id' => 123456]);
+    }
+
+    public function testShouldNotGetToShowInexistent()
+    {
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('find')
+        ->with(123456)
+        ->once()
+        ->andReturn(null);
+
+        Redirect::shouldReceive('back')
+            ->once();
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('GET', 'Pulse\Backend\PagesController@show', ['id' => 123456]);
     }
 
     public function testShouldDestroyAPage()

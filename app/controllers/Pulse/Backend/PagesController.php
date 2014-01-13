@@ -58,7 +58,12 @@ class PagesController extends Controller {
      */
     public function show($id)
     {
-        return View::make('pages.show');
+        $page = $this->pageRepository->find($id);
+
+        if (! $page)
+            Redirect::back();
+
+        return View::make('backend.pages.show');
     }
 
     /**
