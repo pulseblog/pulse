@@ -28,3 +28,12 @@ Route::post('user/forgot_password',        'Pulse\Backend\UserController@do_forg
 Route::get( 'user/reset_password/{token}', 'Pulse\Backend\UserController@reset_password');
 Route::post('user/reset_password',         'Pulse\Backend\UserController@do_reset_password');
 Route::get( 'user/logout',                 'Pulse\Backend\UserController@logout');
+
+
+Route::get('admin/posts',           "Pulse\Backend\PagesController@index");
+Route::get('admin/post/{id}',       "Pulse\Backend\PagesController@show");
+Route::get('admin/post/{id}/edit',  "Pulse\Backend\PagesController@edit");
+Route::get('admin/post/create',     "Pulse\Backend\PagesController@create");
+Route::delete('admin/post/{id}',    "Pulse\Backend\PagesController@destroy");
+Route::put('admin/post/{id}',       "Pulse\Backend\PagesController@update");
+Route::post('admin/post',           "Pulse\Backend\PagesController@store");
