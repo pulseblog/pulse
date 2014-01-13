@@ -198,6 +198,27 @@ class PagesControllerTest extends TestCase
 
     public function testShouldUpdateAPage()
     {
-        # code...
+        // Range
+        $page = m::mock('Pulse\Cms\Page[error]');
+        $page->shouldReceive('errors')
+            ->once()
+            ->andReturn([]);
+
+        $input = [
+            'title' => 'true page',
+            'slug'  => 'true_page',
+        ];
+
+        // Expectations
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('update')
+            ->with(123, $input)
+            ->once()
+            ->andReturn($page);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('PUT', 'Pulse\Backend\PagesController@update', ['id' => 123 ], $input);
     }
 }

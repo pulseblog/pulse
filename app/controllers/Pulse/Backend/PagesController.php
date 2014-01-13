@@ -105,7 +105,18 @@ class PagesController extends Controller {
      */
     public function update($id)
     {
-        //
+        $input = Input::all();
+
+        $page = $this->pageRepository->update($id, $input);
+
+        if (! $page->errors()) {
+            Redirect::action('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
+                ->withInput($input);
+        } else {
+            Redirect::action('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
+                ->withInput($input)
+                ->withErrors($page->errors());
+        }
     }
 
     /**
