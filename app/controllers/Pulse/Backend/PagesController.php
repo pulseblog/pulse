@@ -101,7 +101,9 @@ class PagesController extends Controller {
      */
     public function destroy($id)
     {
-        //
+        $deleted = $this->pageRepository->delete($id);
+
+        Redirect::action('Pulse\Backend\PagesController@index');
     }
 
 }

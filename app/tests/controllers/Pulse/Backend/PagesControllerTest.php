@@ -48,6 +48,7 @@ class PagesControllerTest extends TestCase
         App::instance('Pulse\Cms\PageRepository', $repository);
 
         $this->action('GET', 'Pulse\Backend\PagesController@edit', ['id' => 123456]);
+        $this->assertResponseOk();
     }
 
     public function testShouldNotGetInexistentEdit()
@@ -79,6 +80,7 @@ class PagesControllerTest extends TestCase
         App::instance('Pulse\Cms\PageRepository', $repository);
 
         $this->action('GET', 'Pulse\Backend\PagesController@show', ['id' => 123456]);
+        $this->assertResponseOk();
     }
 
     public function testShouldNotGetToShowInexistent()
@@ -100,7 +102,34 @@ class PagesControllerTest extends TestCase
 
     public function testShouldDestroyAPage()
     {
+        $repository = m::mock('Pulse\Cms\PageRepository');
 
+        $repository->shouldReceive('delete')
+            ->once()
+            ->with(123456)
+            ->andReturn(true);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        $this->action('DELETE', 'Pulse\Backend\PagesController@destroy', ['id' => 123456]);
+    }
+
+    public function testShoulNotDestroyAPageIfDoesntExists()
+    {
+        $repository = m::mock('Pulse\Cms\PageRepository');
+
+        $repository->shouldReceive('delete')
+            ->once()
+            ->with(123456)
+            ->andReturn(false);
+
+        App::instance('Pulse\Cms\PageRepository', $repository);
+
+        Redirect::shouldReceive('action')
+            ->with('Pulse\Backend\PagesController@index')
+            ->once();
+
+        $this->action('DELETE', 'Pulse\Backend\PagesController@destroy', ['id' => 123456]);
     }
 
     public function testShouldStoreAPage()
