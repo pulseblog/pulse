@@ -67,4 +67,53 @@ class PageRepositoryTest extends TestCase
         // Assertion
         $this->assertEquals($page, $repo->findBySlug($slug));
     }
+
+    public function testShouldCreateNew()
+    {
+        $input = [
+            'title'     => 'true page',
+            'slug'      => 'true_page',
+            'content'   => 'asdsd',
+            'author_id' => 123
+        ];
+
+        $user    = m::mock('Pulse\User\User');
+        $newPage = m::mock('Pulse\Cms\Page[save]');
+
+        $user->shouldReceive('getAttribute')
+            ->once()
+            ->andReturn(123);
+
+        $newPage->shouldReceive('save')
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $newPage);
+
+        $repo = new PageRepository;
+        $repo->createNew($input, $user);
+    }
+
+    public function testShouldUpdateAPage()
+    {
+        $input = [
+            'title'     => 'true page',
+            'slug'      => 'true_page',
+            'content'   => 'asdsd',
+            'author_id' => 123
+        ];
+
+        $user    = m::mock('Pulse\User\User');
+        $newPage = m::mock('Pulse\Cms\Page[save]');
+
+        $user->shouldReceive('getAttribute')
+            ->never();
+
+        $newPage->shouldReceive('save')
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $newPage);
+
+        $repo = new PageRepository;
+        $repo->update(123, $input);
+    }
 }
