@@ -96,7 +96,7 @@ class PageRepository
      */
     public function update($page_id, $input)
     {
-        $page = $this->find($page_id);
+        $page = $this->findOrFail($page_id);
 
         if ($page)
         {

@@ -112,6 +112,7 @@ class PageRepositoryTest extends TestCase
 
     public function testShouldUpdateAPage()
     {
+        // Set
         $input = [
             'title'     => 'true page',
             'slug'      => 'true_page',
@@ -119,17 +120,21 @@ class PageRepositoryTest extends TestCase
             'author_id' => 123
         ];
 
-        $user    = m::mock('Pulse\User\User');
+        $repo = new PageRepository;
+        $page = m::mock('Pulse\Cms\Page');
         $newPage = m::mock('Pulse\Cms\Page[save]');
 
-        $user->shouldReceive('getAttribute')
-            ->never();
+        // Expectations
+        $page->shouldReceive('findOrFail')
+            ->once()->with(123)
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $page);
 
         $newPage->shouldReceive('save')
             ->andReturn(m::self());
 
-        App::instance('Pulse\Cms\Page', $newPage);
-
+        // Assertion
         $repo = new PageRepository;
         $repo->update(123, $input);
     }
