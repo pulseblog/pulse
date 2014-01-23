@@ -7,7 +7,6 @@
 		"laravel/framework": "4.1.*",
 		"dflydev/markdown": "1.0.*@dev",
 		"zizaco/confide": "3.1.*",
-		"way/generators": "dev-master"
 	},
 	"require-dev": {
 		"mockery/mockery": "*"

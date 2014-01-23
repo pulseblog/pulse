@@ -106,8 +106,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Zizaco\Confide\ConfideServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
+		'Zizaco\Confide\ConfideServiceProvider'
 	),
 
 	/*
