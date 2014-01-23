@@ -47,6 +47,23 @@ class PageRepositoryTest extends TestCase
         $this->assertEquals($page, $repo->find(1));
     }
 
+    public function testShouldFindOrFail()
+    {
+        // Set
+        $repo = new PageRepository;
+        $page = m::mock('Pulse\Cms\Page');
+
+        // Expectations
+        $page->shouldReceive('findOrFail')
+            ->once()->with(1)
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $page);
+
+        // Assertion
+        $this->assertEquals($page, $repo->findOrFail(1));
+    }
+
     public function testShouldFindBySlug()
     {
         // Set

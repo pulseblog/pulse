@@ -44,6 +44,18 @@ class PageRepository
     }
 
     /**
+     * Finds a Page by the given id or throw exception
+     * @param  integer $id Page id
+     * @return Page A Page object or null.
+     */
+    public function findOrFail($id)
+    {
+        $instance = App::make($this->domainObject);
+
+        return $instance::findOrFail($id);
+    }
+
+    /**
      * Finds a Page by the given slug
      * @param  string $slug Page slug
      * @return Page A Page object or null.
