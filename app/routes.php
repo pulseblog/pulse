@@ -8,7 +8,7 @@
 */
 
 Route::get('/',             'Pulse\Frontend\CmsController@indexPosts');
-Route::get('page_{slug}',   'Pulse\Frontend\CmsController@showPage');
+Route::get('page-{slug}',   'Pulse\Frontend\CmsController@showPage');
 Route::get('{slug}',        'Pulse\Frontend\CmsController@showPost');
 
 /*
@@ -28,3 +28,12 @@ Route::post('user/forgot_password',        'Pulse\Backend\UserController@do_forg
 Route::get( 'user/reset_password/{token}', 'Pulse\Backend\UserController@reset_password');
 Route::post('user/reset_password',         'Pulse\Backend\UserController@do_reset_password');
 Route::get( 'user/logout',                 'Pulse\Backend\UserController@logout');
+
+
+Route::get('admin/pages',           'Pulse\Backend\PagesController@index');
+Route::get('admin/page/{id}',       'Pulse\Backend\PagesController@show');
+Route::get('admin/page/{id}/edit',  'Pulse\Backend\PagesController@edit');
+Route::get('admin/pages/create',    'Pulse\Backend\PagesController@create');
+Route::delete('admin/page/{id}',    'Pulse\Backend\PagesController@destroy');
+Route::put('admin/page/{id}',       'Pulse\Backend\PagesController@update');
+Route::post('admin/page',           'Pulse\Backend\PagesController@store');
