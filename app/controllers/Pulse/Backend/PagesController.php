@@ -1,12 +1,24 @@
 <?php namespace Pulse\Backend;
 
 use Controller, View, Input, Redirect, Confide, App;
+use Pulse\Cms\PageRepository;
 
+/**
+ * PagesController Class
+ *
+ * CRUD Controller for Pulse\Cms\Page resource.
+ *
+ * @package Pulse\Backend
+ */
 class PagesController extends Controller {
 
     protected $pageRepository;
 
-    function __construct(\Pulse\Cms\PageRepository $repo)
+    /**
+     * Injects dependencies into controller
+     * @param PageRepository $repo
+     */
+    function __construct(PageRepository $repo)
     {
         $this->pageRepository = $repo;
     }
@@ -18,16 +30,11 @@ class PagesController extends Controller {
      */
     public function index()
     {
-        $page = 0;
-
-        if (Input::get('page'))
-            $page = Input::get('page');
+        $page = Input::get('page', 0);
 
         $pages = $this->pageRepository->all($page);
 
-        $params = [ 'pages' => $pages ];
-
-        return View::make('backend.pages.index', $params);
+        return View::make('backend.pages.index', compact('pages'));
     }
 
     /**
@@ -38,7 +45,7 @@ class PagesController extends Controller {
     public function create()
     {
         $page = App::make('Pulse\Cms\Page');
-        return View::make('backend.pages.create', ['page' => $page]);
+        return View::make('backend.pages.create', compact('page'));
     }
 
     /**
@@ -49,7 +56,6 @@ class PagesController extends Controller {
     public function store()
     {
         $user = Confide::user();
-
         $input = Input::all();
 
         if (! $user)
@@ -58,7 +64,8 @@ class PagesController extends Controller {
         $page = $this->pageRepository->createNew($input, $user);
 
         if (! $page->errors()) {
-            return Redirect::action('Pulse\Backend\PagesController@edit',
+            return Redirect::action(
+                        'Pulse\Backend\PagesController@edit',
                         ['id' => $page->id ]
                    );
         } else {
@@ -76,10 +83,7 @@ class PagesController extends Controller {
      */
     public function show($id)
     {
-        $page = $this->pageRepository->find($id);
-
-        if (! $page)
-            return Redirect::back();
+        $page = $this->pageRepository->findOrFail($id);
 
         return View::make('backend.pages.show');
     }
@@ -92,10 +96,7 @@ class PagesController extends Controller {
      */
     public function edit($id)
     {
-        $page = $this->pageRepository->find($id);
-
-        if (! $page)
-            return Redirect::back();
+        $page = $this->pageRepository->findOrFail($id);
 
         return View::make('backend.pages.edit', ['page' => $page]);
     }

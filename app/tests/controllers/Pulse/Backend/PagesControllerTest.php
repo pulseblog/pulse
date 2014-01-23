@@ -16,94 +16,73 @@ class PagesControllerTest extends TestCase
 
     public function testShouldGetIndex()
     {
+        // Set
+        $pages = [];
         $repository = m::mock('Pulse\Cms\PageRepository');
 
+        // Expectation
         $repository->shouldReceive('all')
             ->once()
-            ->andReturn(m::mock('_cursor'));
+            ->andReturn($pages);
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('GET', 'Pulse\Backend\PagesController@index');
-
         $this->assertResponseOk();
     }
 
     public function testShouldGetCreate()
     {
+        // Assertion
         $this->action('GET', 'Pulse\Backend\PagesController@create');
-
         $this->assertResponseOk();
     }
 
     public function testShouldGetEdit()
     {
+        // Set
         $repository = m::mock('Pulse\Cms\PageRepository');
+        $page = App::make('Pulse\Cms\Page');
 
-        $repository->shouldReceive('find')
+        // Expectation
+        $repository->shouldReceive('findOrFail')
         ->with(123456)
         ->once()
-        ->andReturn(new Page);
+        ->andReturn($page);
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('GET', 'Pulse\Backend\PagesController@edit', ['id' => 123456]);
         $this->assertResponseOk();
-    }
-
-    public function testShouldNotGetInexistentEdit()
-    {
-        $repository = m::mock('Pulse\Cms\PageRepository');
-
-        $repository->shouldReceive('find')
-        ->with(123456)
-        ->once()
-        ->andReturn(null);
-
-        Redirect::shouldReceive('back')
-            ->once();
-
-        App::instance('Pulse\Cms\PageRepository', $repository);
-
-        $this->action('GET', 'Pulse\Backend\PagesController@edit', ['id' => 123456]);
     }
 
     public function testShouldGetShow()
     {
+        // Set
         $repository = m::mock('Pulse\Cms\PageRepository');
+        $page = App::make('Pulse\Cms\Page');
 
-        $repository->shouldReceive('find')
+        // Expectation
+        $repository->shouldReceive('findOrFail')
         ->with(123456)
         ->once()
         ->andReturn(new Page);
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('GET', 'Pulse\Backend\PagesController@show', ['id' => 123456]);
         $this->assertResponseOk();
     }
 
-    public function testShouldNotGetToShowInexistent()
+    public function testShouldDestroy()
     {
+        // Set
         $repository = m::mock('Pulse\Cms\PageRepository');
 
-        $repository->shouldReceive('find')
-        ->with(123456)
-        ->once()
-        ->andReturn(null);
-
-        Redirect::shouldReceive('back')
-            ->once();
-
-        App::instance('Pulse\Cms\PageRepository', $repository);
-
-        $this->action('GET', 'Pulse\Backend\PagesController@show', ['id' => 123456]);
-    }
-
-    public function testShouldDestroyAPage()
-    {
-        $repository = m::mock('Pulse\Cms\PageRepository');
-
+        // Expectation
         $repository->shouldReceive('delete')
             ->once()
             ->with(123456)
@@ -111,31 +90,17 @@ class PagesControllerTest extends TestCase
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('DELETE', 'Pulse\Backend\PagesController@destroy', ['id' => 123456]);
-    }
-
-    public function testShoulNotDestroyAPageIfDoesntExists()
-    {
-        $repository = m::mock('Pulse\Cms\PageRepository');
-
-        $repository->shouldReceive('delete')
-            ->once()
-            ->with(123456)
-            ->andReturn(false);
-
-        App::instance('Pulse\Cms\PageRepository', $repository);
-
-        Redirect::shouldReceive('action')
-            ->with('Pulse\Backend\PagesController@index')
-            ->once();
-
-        $this->action('DELETE', 'Pulse\Backend\PagesController@destroy', ['id' => 123456]);
+        $this->assertRedirectedToAction('Pulse\Backend\PagesController@index');
     }
 
     public function testShouldStoreAPage()
     {
-        // Range
+        // Set
+        $user = m::mock('Pulse\User\User');
         $page = m::mock('Pulse\Cms\Page[errors]');
+        $page->id = 1;
         $page->shouldReceive('errors')
             ->once()
             ->andReturn([]);
@@ -145,12 +110,10 @@ class PagesControllerTest extends TestCase
             'slug'  => 'true_page',
         ];
 
-        // Expectations
-        $user = m::mock('Pulse\User\User');
-
+        // Expectation
         Confide::shouldReceive('user')
-        ->andReturn($user)
-        ->once();
+            ->andReturn($user)
+            ->once();
 
         $repository = m::mock('Pulse\Cms\PageRepository');
 
@@ -161,12 +124,18 @@ class PagesControllerTest extends TestCase
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('POST', 'Pulse\Backend\PagesController@store', $input);
+        $this->assertRedirectedToAction(
+            'Pulse\Backend\PagesController@edit',
+            ['id' => $page->id ]
+        );
     }
 
     public function testShouldNotStoreAInvalidPage()
     {
-        // Range
+        // Set
+        $user = m::mock('Pulse\User\User');
         $page = m::mock('Pulse\Cms\Page');
         $page->shouldReceive('errors')
             ->twice()
@@ -177,12 +146,10 @@ class PagesControllerTest extends TestCase
             'slug'  => 'true_page',
         ];
 
-        // Expectations
-        $user = m::mock('Pulse\User\User');
-
+        // Expectation
         Confide::shouldReceive('user')
-        ->andReturn($user)
-        ->once();
+            ->andReturn($user)
+            ->once();
 
         $repository = m::mock('Pulse\Cms\PageRepository');
 
@@ -193,12 +160,16 @@ class PagesControllerTest extends TestCase
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('POST', 'Pulse\Backend\PagesController@store', $input);
+        $this->assertRedirectedToAction(
+            'Pulse\Backend\PagesController@create'
+        );
     }
 
     public function testShouldUpdateAPage()
     {
-        // Range
+        // Set
         $page = m::mock('Pulse\Cms\Page[error]');
         $page->shouldReceive('errors')
             ->once()
@@ -209,7 +180,7 @@ class PagesControllerTest extends TestCase
             'slug'  => 'true_page',
         ];
 
-        // Expectations
+        // Expectation
         $repository = m::mock('Pulse\Cms\PageRepository');
 
         $repository->shouldReceive('update')
@@ -219,6 +190,11 @@ class PagesControllerTest extends TestCase
 
         App::instance('Pulse\Cms\PageRepository', $repository);
 
+        // Assertion
         $this->action('PUT', 'Pulse\Backend\PagesController@update', ['id' => 123 ], $input);
+        $this->assertRedirectedToAction(
+            'Pulse\Backend\PagesController@edit',
+            ['id' => $page->id ]
+        );
     }
 }
