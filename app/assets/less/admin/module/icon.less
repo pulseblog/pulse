@@ -1,0 +1,88 @@
+/**
+ * icon.less
+ *
+ * Icons using a sprite png image ;)
+ *
+ */
+
+/*******************************************
+* Iconset background-position mixins
+********************************************/
+
+.iconset_position(@x: 1, @y: 1 ) {
+    @posx: @x - 1;
+    @posy: @y - 1;
+    background-position: (-15px+(-52px*(@posx))) (-4px+(-52px*(@posy)));
+}
+
+.iconset_position_small(@x: 1, @y: 1 ) {
+    @posx: @x - 1;
+    @posy: @y - 1;
+    background-position: (-7px+(-26px*(@posx))) (-2px+(-26px*(@posy)));
+}
+
+/*******************************************
+* Icons
+********************************************/
+
+.icon {
+    background-image: url("@{img}/template/iconset_small.png");
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background-position: -7px -2px;
+    margin-bottom: -5px;
+
+    &.talk { .iconset_position_small(4,1); }
+    &.user { .iconset_position_small(1,23); }
+    &.new-user { .iconset_position_small(2,23); }
+    &.search { .iconset_position_small(5,10); }
+    &.key { .iconset_position_small(2,13); }
+    &.drop { .iconset_position_small(15,18); }
+    &.warning { .iconset_position_small(12,21); }
+
+    @media @tablet, @phone {
+        background-image: url("@{img}/template/iconset.png");
+        background-size: 400px;
+    }
+
+    &.is-white {
+        @media @desktop {
+            background-image: url("@{img}/template/iconset_white_small.png");
+        }
+
+        @media @tablet, @phone {
+            background-image: url("@{img}/template/iconset_white.png");
+        }
+    }
+
+}
+
+/*******************************************
+* Big icons
+********************************************/
+
+.icon.is-big {
+    background-image: url("@{img}/template/iconset.png") !important;
+    width: 42px;
+    height: 42px;
+    background-position: -15px -4px;
+    margin-bottom: -10px;
+
+    &.talk { .iconset_position(4,1); }
+    &.user { .iconset_position(1,23); }
+    &.new-user { .iconset_position(2,23); }
+    &.search { .iconset_position(5,10); }
+    &.key { .iconset_position(2,13); }
+    &.drop { .iconset_position(15,18); }
+    &.warning { .iconset_position(12,21); }
+
+    @media @tablet, @phone {
+        background-image: url("@{img}/template/iconset.png");
+        background-size: 800px;
+    }
+
+    &.is-white {
+        background-image: url("@{img}/template/iconset_white.png") !important;
+    }
+}

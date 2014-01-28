@@ -1,0 +1,102 @@
+/**
+ * grid.less
+ *
+ * A simple grid system used to place blocks
+ * of elements in a responsive way.
+ */
+
+/*******************************************
+* Grid classes
+********************************************/
+
+.l-block-container{
+
+    /**
+     * The .l-block-container may have a number
+     * of l-block-n elements where 'n' means how
+     * many columns are going to be placed in
+     * a single line.
+     */
+
+    width: 1080px;
+    margin: auto;
+    overflow: hidden;
+
+    .l-block-1,.l-block-2,.l-block-3,
+    .l-block-4,.l-block-5,.l-block-6,
+    .l-block-7,.l-block-8 {
+        float: left;
+        padding: 10px;
+    }
+
+    .l-block-1 { width: 1060px; }
+    .l-block-2 { width: 520px; }
+    .l-block-3 { width: 340px; }
+    .l-block-4 { width: 250px; }
+    .l-block-5 { width: 196px; }
+    .l-block-6 { width: 160px; }
+    .l-block-7 { width: 134px; }
+    .l-block-8 { width: 115px; }
+
+    /**
+     * .centered is a special class that
+     * allow a grid piece to be centered within
+     * a l-block-container
+     */
+    .l-centered {
+        float: none;
+        margin: auto;
+    }
+
+    @media @tablet {
+
+        /**
+         * In the tablet media query, display
+         * max of two blocks per line.
+         */
+
+        width: 100%;
+
+        .l-block-1,.l-block-2,.l-block-3,
+        .l-block-4,.l-block-5,.l-block-6,
+        .l-block-7,.l-block-8 {
+            margin: 0;
+            .box-sizing(border-box);
+            width: 50%;
+            padding: 20px;
+        }
+
+        .l-block-1 { width: 100%; }
+
+        /**
+         * .centered is a special class that
+         * allow a grid piece to be centered within
+         * a l-block-container
+         */
+        .l-centered {
+            float: none;
+            margin: auto;
+        }
+    }
+
+    @media @phone {
+
+        /**
+         * In the phone media query, display
+         * a single block per line.
+         */
+
+        width: 100%;
+        margin: 0;
+
+        .l-block-1,.l-block-2,.l-block-3,
+        .l-block-4,.l-block-5,.l-block-6,
+        .l-block-7,.l-block-8 {
+            margin: 0;
+            padding: 10px;
+            .box-sizing(border-box);
+            width: 100%;
+            padding: 10px 30px;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+/**
+ * This project uses smacss in order to keep
+ * the stylesheets organized.
+ *
+ * For more details:
+ * http://smacss.com/book/categorizing
+ */
+
+/**
+ * Import mixins
+ *
+ * A set of useful LESS mixins
+ */
+@import "admin/mixins/elements";
+
+/**
+ * Import base rules
+ *
+ * Base styles include setting heading sizes,
+ * default link styles, default font styles,
+ * and body backgrounds.
+ */
+@import "admin/base/reset";
+@import "admin/base/default";
+@import "admin/base/form";
+
+/**
+ * Import layout rules
+ *
+ * These rules serves as a grid to orient the
+ * element placement.
+ */
+@import "admin/layout/general";
+@import "admin/layout/grid";
+
+/**
+ * Import modules
+ *
+ * Modules sit inside Layout components and can
+ * sometimes sit within other Modules, too. Each
+ * Module should be designed to exist as a
+ * standalone component.
+ */
+@import "admin/module/button";
+@import "admin/module/breadcrumb";
+@import "admin/module/menubar";
+@import "admin/module/toolbar";
+@import "admin/module/footer";
+@import "admin/module/typography";
+@import "admin/module/table";
+@import "admin/module/input";
+@import "admin/module/tabs";
+@import "admin/module/picture";
+@import "admin/module/icon";

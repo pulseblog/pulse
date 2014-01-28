@@ -16,12 +16,22 @@ return array(
     'files_to_watch' => array(
 
         '../*.less' => function($file) {
-            // Using node.js less compiler
+
+            // Compilling main.less --------------------------------
             echo "Compiling 'main.less'...\n";
 
             $cd = 'cd '.app_path().'/assets/less;';
             $from =  app_path().'/assets/less/main.less';
             $to = app_path().'/../public/assets/css/main.css';
+
+            exec($cd.' lessc '.$from.' > '.$to);
+
+            // Compilling admin.less --------------------------------
+            echo "Compiling 'admin.less'...\n";
+
+            $cd = 'cd '.app_path().'/assets/less;';
+            $from =  app_path().'/assets/less/admin.less';
+            $to = app_path().'/../public/assets/css/admin.css';
 
             exec($cd.' lessc '.$from.' > '.$to);
         },

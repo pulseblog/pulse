@@ -1,0 +1,41 @@
+/**
+ * table.less
+ *
+ * A bunch of special styles to be applied
+ * to table elements
+ *
+ */
+
+/*******************************************
+* Basic Table
+********************************************/
+
+table {
+    width: 100%;
+    margin: 5px 0px;
+
+    &.bordered {
+        border: solid 1px @colorPastel;
+    }
+
+    td,th {
+        display: table-cell;
+        padding: 5px;
+        text-align: left;
+    }
+
+    thead {
+        border-bottom: solid 2px @colorMain;
+        font-weight: bold;
+    }
+
+    tr {
+        display: table-row;
+        border-bottom: solid 1px @colorPastel;
+        .transition(0.2s, ease-out);
+
+        &:hover {
+            background-color: lighten(@colorPastel, 5%);
+        }
+    }
+}
