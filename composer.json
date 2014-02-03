@@ -9,7 +9,8 @@
 		"zizaco/confide": "3.1.*"
 	},
 	"require-dev": {
-		"mockery/mockery": "*"
+		"mockery/mockery": "*",
+		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

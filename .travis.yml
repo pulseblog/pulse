@@ -1,10 +1,21 @@
+# .travis.yml
 language: php
-
 php:
   - 5.4
 
+matrix:
+  allow_failures:
+    - php: 5.5
+
 before_script:
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev
+  - php composer.phar install --dev --no-interaction
 
-script: phpunit
+script:
+  - mkdir -p build/logs
+  - php vendor/bin/phpunit -c phpunit.xml.dist
+
+after_script:
+  - php vendor/bin/coveralls
+  # or enable logging
+  - php vendor/bin/coveralls -v
