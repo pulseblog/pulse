@@ -47,6 +47,23 @@ class PageRepositoryTest extends TestCase
         $this->assertEquals($page, $repo->find(1));
     }
 
+    public function testShouldFindOrFail()
+    {
+        // Set
+        $repo = new PageRepository;
+        $page = m::mock('Pulse\Cms\Page');
+
+        // Expectations
+        $page->shouldReceive('findOrFail')
+            ->once()->with(1)
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $page);
+
+        // Assertion
+        $this->assertEquals($page, $repo->findOrFail(1));
+    }
+
     public function testShouldFindBySlug()
     {
         // Set
@@ -66,5 +83,59 @@ class PageRepositoryTest extends TestCase
 
         // Assertion
         $this->assertEquals($page, $repo->findBySlug($slug));
+    }
+
+    public function testShouldCreateNew()
+    {
+        $input = [
+            'title'     => 'true page',
+            'slug'      => 'true_page',
+            'content'   => 'asdsd',
+            'author_id' => 123
+        ];
+
+        $user    = m::mock('Pulse\User\User');
+        $newPage = m::mock('Pulse\Cms\Page[save]');
+
+        $user->shouldReceive('getAttribute')
+            ->once()
+            ->andReturn(123);
+
+        $newPage->shouldReceive('save')
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $newPage);
+
+        $repo = new PageRepository;
+        $repo->createNew($input, $user);
+    }
+
+    public function testShouldUpdateAPage()
+    {
+        // Set
+        $input = [
+            'title'     => 'true page',
+            'slug'      => 'true_page',
+            'content'   => 'asdsd',
+            'author_id' => 123
+        ];
+
+        $repo = new PageRepository;
+        $page = m::mock('Pulse\Cms\Page');
+        $newPage = m::mock('Pulse\Cms\Page[save]');
+
+        // Expectations
+        $page->shouldReceive('findOrFail')
+            ->once()->with(123)
+            ->andReturn(m::self());
+
+        App::instance('Pulse\Cms\Page', $page);
+
+        $newPage->shouldReceive('save')
+            ->andReturn(m::self());
+
+        // Assertion
+        $repo = new PageRepository;
+        $repo->update(123, $input);
     }
 }

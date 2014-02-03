@@ -23,7 +23,7 @@ class SeePageTest extends AcceptanceTestCase {
         ]);
 
         // When
-        $this->i_visit_url('page_'.'static_page_with_markdown');
+        $this->i_visit_url('page-'.'static_page_with_markdown');
 
         // Then
         $this->i_should_see(
