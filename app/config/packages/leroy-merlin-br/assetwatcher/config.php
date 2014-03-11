@@ -17,12 +17,12 @@ return array(
 
         '../*.less' => function($file) {
 
-            // Compilling main.less --------------------------------
-            echo "Compiling 'main.less'...\n";
+            // Compilling front.less --------------------------------
+            echo "Compiling 'front.less'...\n";
 
             $cd = 'cd '.app_path().'/assets/less;';
-            $from =  app_path().'/assets/less/main.less';
-            $to = app_path().'/../public/assets/css/main.css';
+            $from =  app_path().'/assets/less/front.less';
+            $to = app_path().'/../public/assets/css/front.css';
 
             exec($cd.' lessc '.$from.' > '.$to);
 
