@@ -1,0 +1,42 @@
+/**
+ * picture.less
+ *
+ * Module that defines how images and
+ * pictures are going to be styled
+ */
+
+/*******************************************
+* Person picture
+********************************************/
+
+.person-pic {
+    width: 160px;
+    float: left;
+    .rounded(9999px);
+    margin-right: 20px;
+
+    @media @phone {
+        display: block;
+        float: none;
+        width: 80%;
+        max-width: 200px;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+}
+
+/*******************************************
+* Black & White picture
+********************************************/
+
+.grayscale {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
+
+    &:hover{
+        -webkit-filter: none;
+        -moz-filter: none;
+        filter: none;
+    }
+}

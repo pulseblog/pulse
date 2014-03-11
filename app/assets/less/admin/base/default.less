@@ -1,0 +1,123 @@
+/**
+ * default.less
+ *
+ * Base styles include setting heading sizes,
+ * default link styles, default font styles,
+ * and body backgrounds.
+ */
+
+/*******************************************
+* Variables
+********************************************/
+
+// Color variables
+@colorBlack:     #000;
+@colorGray:      #3b3b3b;
+@colorLightGray: #666;
+@colorWhite:     #FFF;
+@colorPastel:    #DDD;
+@colorMain:      #3B8EB9;
+@colorSecond:    #A67F17;
+@colorThird:     #8AC932;
+@colorBackground:#F5F5F5;
+
+// Direcoty variables
+@img: "/assets/img";
+
+// Fonts
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+
+/*******************************************
+* Base definitions
+********************************************/
+
+body, html {
+    color: @colorGray;
+    font-size: 16px;
+    font-family: 'PT Sans', 'Arial', sans-serif;
+    height: 100%;
+    line-height: 1.45em;
+    background-color: @colorBackground;
+}
+
+h1,h2,h3,h4 {
+    color: @colorBlack;
+    font-size: 38px;
+    padding: 28px 0px;
+    .opacity(0.5);
+    display: block;
+    font-family: 'Ubuntu', 'Arial', sans-serif;
+    line-height: 1em;
+}
+
+h2 {font-size: 30px; .opacity(0.7);}
+h3 {font-size: 26px; .opacity(0.4);}
+h4 {font-size: 20px;}
+
+small {
+    opacity: 0.7;
+    font-size: 0.8em;
+}
+
+p {
+    text-align: justify;
+}
+
+a {
+    color: @colorSecond;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover{
+        .opacity(0.7);
+    }
+}
+
+b {
+    font-weight: bold;
+}
+
+i {
+    font-style: italic;
+}
+
+em {
+    color: @colorMain;
+}
+
+hr {
+    border: solid 2px @colorPastel;
+}
+
+pre, code {
+    font-family: monospace;
+    font-size: 14px;
+    background-color: @colorBlack;
+    color: @colorWhite;
+    opacity: 0.8;
+    padding: 5px;
+    margin: 5px 0;
+
+    &.is-inline {
+        display: inline;
+    }
+}
+
+blockquote {
+    display: block;
+    background-color: @colorPastel;
+    font-style: italic;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    small {
+        display: block;
+        margin-top: 5px;
+
+        &:before {
+            content: '\2014 \00A0';
+        }
+    }
+}

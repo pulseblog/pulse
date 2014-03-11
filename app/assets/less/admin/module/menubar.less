@@ -1,0 +1,149 @@
+/**
+ * menubar.less
+ *
+ * The overall style of the menus, plus the
+ * mobile version of the menu, that is
+ * triggered using the @phone media query.
+ *
+ */
+
+/*******************************************
+* Menu bar
+********************************************/
+
+.menubar {
+
+    .transition(0, ease-out);
+
+    @media @desktop, @tablet {
+
+        /**
+         * The common menu. Ideally applied to a
+         * "l-horizontal" element, it will handle
+         * the styling of an unordered list containing
+         * anchors.
+         */
+
+        background-color: @colorLightGray;
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            border-right: solid 1px darken(@colorPastel, 30%);
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        li * {
+            padding: 0 20px;
+        }
+
+        a {
+            color: @colorPastel;
+            text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
+
+            &:hover {
+                text-decoration: underline;
+                text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+            }
+        }
+    }
+
+    @media @phone {
+
+        /**
+         * The mobile version of the menubar will
+         * not be visible until the .is-active state
+         * is applied to the .menubar element.
+         */
+
+        li {
+            display: none;
+        }
+
+        &.is-active {
+            z-index: 99;
+            background-color: lighten(@colorLightGray, 40%);
+            position: absolute;
+            display: block;
+            border-bottom: solid 4px lighten(@colorLightGray, 48%);
+            border-right: solid 4px lighten(@colorLightGray, 48%);
+            top: 38px;
+            width: 90%;
+            text-transform:uppercase;
+
+            li {
+                display: block;
+                border-bottom: solid 2px lighten(@colorLightGray,20%);
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            li * {
+                padding: 15px;
+            }
+
+            a {
+                color: @colorLightGray;
+                display: block;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: @colorMain;
+                }
+            }
+
+            .menu-activator {
+                top: -38px;
+                height: 34px;
+                background-color: @colorMain;
+                border-bottom: solid 4px darken(@colorMain, 10%);
+                .opacity(1);
+            }
+        }
+    }
+}
+
+/*******************************************
+* Menu toggler for mobile
+********************************************/
+
+.menu-activator {
+
+    /**
+     * Only visible in the @phone media query,
+     * the .menu-activator should be placed
+     * in a anchor within the .menubar
+     *
+     * The .menu-activator is the "button" that
+     * will toggle the mobile menu.
+     */
+
+    @media @desktop, @tablet {
+        display: none;
+    }
+
+    @media @phone {
+        display: block;
+        position: absolute;
+        top: 0px;
+        width: 38px;
+        height: 38px;
+        .transition(0, ease-out);
+        background-image: url("@{img}/template/menu_icon.png");
+        background-repeat: no-repeat;
+        background-size: 89%;
+        background-position: 2px;
+        .opacity(0.65);
+
+        &:hover {
+            .opacity(1);
+        }
+    }
+}

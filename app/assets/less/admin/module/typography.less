@@ -1,0 +1,191 @@
+/**
+ * typography.less
+ *
+ * A bunch of special styles to be applied
+ * to text elements.
+ *
+ */
+
+/*******************************************
+* Master title
+********************************************/
+
+.master-title {
+    text-align: center;
+    padding-top: 0px;
+    font-size: 60px;
+    .opacity(1);
+
+    @media @tablet { font-size: 50px; }
+    @media @phone { font-size: 40px; }
+
+    b {
+        font-weight: normal;
+        color: @colorMain;
+
+        @media @tablet, @phone {
+            display: block;
+        }
+    }
+}
+
+/*******************************************
+* Huge feature
+********************************************/
+
+.huge-feature {
+    text-align: center;
+    margin-bottom: 30px;
+
+    h1,h2,h3,h4 {
+        .opacity(1);
+        font-size: 30px;
+        padding: 5px;
+    }
+
+    p {
+        .opacity(0.5);
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+/*******************************************
+* Information and explaination
+********************************************/
+
+.information {
+    p {
+        margin: 10px 0;
+        .opacity(0.8);
+    }
+
+    h4 {
+        font-size: 20px;
+        padding-bottom: 5px;
+        color: @colorSecond;
+        .opacity(0.7);
+    }
+}
+
+/*******************************************
+* Lists
+********************************************/
+
+ul.list {
+
+    li {
+        &:before {
+            content: " ∗ ";
+            color: @colorMain;
+            font-weight: bold;
+        }
+
+        margin: 15px 0;
+    }
+}
+
+ol.list {
+    counter-reset: list-counter;
+
+    li {
+        &:before {
+            content: counter(list-counter)'. ';
+            counter-increment: list-counter;
+            color: @colorMain;
+            font-weight: bold;
+
+        }
+
+        margin: 15px 0;
+    }
+}
+
+/*******************************************
+* Cute text
+********************************************/
+
+.cute {
+    .opacity(0.8);
+    font-size: 0.9em;
+}
+
+/*******************************************
+* Lead text
+********************************************/
+
+.lead {
+    .opacity(0.7);
+    font-size: 1.2em;
+}
+
+/*******************************************
+* Well text
+********************************************/
+
+.well {
+    display: block;
+    background-color: @colorPastel;
+    padding: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: solid 2px darken(@colorPastel, 10%);
+
+    &.is-success {
+        background-color: lighten(@colorThird, 20%);
+        color: darken(@colorThird, 30%);
+        border-top: solid 2px @colorThird;
+    }
+
+    &.is-information {
+        background-color: desaturate(lighten(@colorSecond, 30%), 30%);
+        color: darken(@colorSecond, 20%);
+        border-top: solid 2px @colorSecond;
+    }
+
+    &.is-error {
+        background-color: lighten(@colorMain, 20%);
+        color: darken(@colorMain, 30%);
+        border-top: solid 2px @colorMain;
+    }
+}
+
+/*******************************************
+* Blockquote styling
+********************************************/
+
+blockquote {
+
+    &.is-success {
+        background-color: lighten(@colorThird, 20%);
+        color: darken(@colorThird, 30%);
+    }
+
+    &.is-information {
+        background-color: desaturate(lighten(@colorSecond, 30%), 30%);
+        color: darken(@colorSecond, 20%);
+    }
+
+    &.is-error {
+        background-color: lighten(@colorMain, 20%);
+        color: darken(@colorMain, 30%);
+    }
+}
+
+/*******************************************
+* Emphasis styling
+********************************************/
+
+p,em,b,i {
+    &.is-success {
+        color: darken(@colorThird, 1%);
+    }
+
+    &.is-information {
+        color: darken(@colorSecond, 1%);
+    }
+
+    &.is-error {
+        color: darken(@colorMain, 1%);
+    }
+}

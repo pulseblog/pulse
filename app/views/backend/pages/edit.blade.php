@@ -1,31 +1,48 @@
-{{ Form::model(
-    $page,
-    [
-        'action' => ['Pulse\Backend\PagesController@update', $page->id],
-        'method' => 'PUT',
-    ]
-   )
-}}
-    <fieldset>
-        {{ Form::label('title', 'Título') }}
-        {{ Form::text('title') }}
-    </fieldset>
+@extends ('backend.templates.main')
 
-    <fieldset>
-        {{ Form::label('slug', 'Slug') }}
-        {{ Form::text('slug') }}
-    </fieldset>
+@section ('breadcrumb')
+    <ul class='breadcrumb'>
+        <li>Pulse</li>
+        <li>{{ link_to_action('Pulse\Backend\PagesController@index', 'Pages') }}</li>
+        <li>Editting {{{ $page->title }}}</li>
+    </ul>
+@stop
 
-    <fieldset>
-        {{ Form::label('lean_content', 'Resumo') }}
-        {{ Form::textarea('lean_content') }}
-    </fieldset>
+@section ('content')
+    <div class="l-block-1">
+        {{ Form::model(
+            $page,
+            [
+                'action' => ['Pulse\Backend\PagesController@update', $page->id],
+                'method' => 'PUT',
+            ]
+           )
+        }}
+            <fieldset>
+                {{ Form::label('title', trans('resources.attributes.Page.title')) }}
+                {{ Form::text('title') }}
+            </fieldset>
 
-    <fieldset>
-        {{ Form::label('content', 'Conteúdo') }}
-        {{ Form::textarea('content') }}
-    </fieldset>
+            <fieldset>
+                {{ Form::label('slug', trans('resources.attributes.Page.slug')) }}
+                {{ Form::text('slug') }}
+            </fieldset>
 
-    {{ Form::submit('Salvar') }}
+            <fieldset>
+                {{ Form::label('lean_content', trans('resources.attributes.Page.lean_content')) }}
+                {{ Form::textarea('lean_content') }}
+            </fieldset>
 
-{{ Form::close() }}
+            <fieldset>
+                {{ Form::label('content', trans('resources.attributes.Page.content')) }}
+                {{ Form::textarea('content') }}
+            </fieldset>
+
+            <div class='well'>
+                {{ Form::submit('Salvar Pagina') }}
+                {{ link_to_action('Pulse\Backend\PagesController@index', 'Cancelar', null, ['class'=>'btn is-inverted']) }}
+            </div>
+
+        {{ Form::close() }}
+    </div>
+@stop

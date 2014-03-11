@@ -1,0 +1,49 @@
+/**
+ * general.less
+ *
+ * These rules defines the orientation and
+ * the placement of general elements.
+ */
+
+/*******************************************
+* Media queries
+********************************************/
+
+@desktop:   ~"only screen and (min-width: 1080px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1079px)";
+@phone:     ~"only screen and (max-width: 719px)";
+
+/*******************************************
+* Layout
+********************************************/
+
+#top-horizontal {
+    display:block;
+    height: 162px;
+
+    @media @tablet {
+        height: 80px;
+    }
+
+    @media @phone {
+        height: 38px;
+    }
+}
+
+l-horizontal {
+    display:block;
+    width: 100%;
+}
+
+#wrapper {
+    min-height: 50%;
+    margin: 20px 0 40px 0;
+
+    @media @desktop {
+        margin: 20px 0 80px 0;
+    }
+}
+
+#footer {
+    display:block;
+}

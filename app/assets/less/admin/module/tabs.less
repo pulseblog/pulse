@@ -1,0 +1,55 @@
+/**
+ * tabs.less
+ *
+ * Styles that should be applied in an ul in
+ * order to create a tab style navigation bar
+ *
+ */
+
+/*******************************************
+* Tabs
+********************************************/
+
+.tabs {
+    border-bottom: solid 1px @colorPastel;
+    paddint-bottom: -1px;
+    //overflow: hidden;
+
+    li {
+        display: inline-block;
+
+        * {
+            display: block;
+            padding: 5px 25px 0px 25px;
+            border: solid 1px @colorPastel;
+            border-bottom: none;
+            font-weight: bold;
+            color: lighten(@colorGray, 20%);
+            background-color: lighten(@colorPastel, 5%);
+            .translate(0, 5px);
+            .transition(0.2s, ease-out);
+
+            @media @phone {
+                padding: 5px 5px 0px 5px;
+            }
+
+            &:hover {
+                padding-bottom: 5px;
+                .translate(0, 0);
+                background-color: @colorWhite;
+            }
+        }
+
+        &.active {
+            * {
+                padding-bottom: 5px;
+                .translate(0, 0);
+                .border-radius(3px, 0, 0, 3px);
+                border-top: solid 2px @colorMain;
+                color: @colorBlack;
+                background-color: @colorWhite;
+                .box-shadow(0 1px 0 #FFF);
+            }
+        }
+    }
+}

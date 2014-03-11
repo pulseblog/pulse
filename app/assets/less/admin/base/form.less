@@ -1,0 +1,50 @@
+/**
+ * form.less
+ *
+ * Base styles for form components.
+ */
+
+/*******************************************
+* Form definitions
+********************************************/
+
+input, select, textarea {
+    color: @colorGray;
+    background-color: @colorWhite;
+    font-size: 16px;
+    font-family: 'PT Sans', 'Arial', sans-serif;
+    border: none;
+    padding: 10px;
+    .rounded(2px);
+
+    @media @phone {
+        width: 100%;
+        .box-sizing(border-box);
+    }
+}
+
+input[type=text], input[type=password], textarea, select {
+    border: solid 2px #DDD;
+}
+
+label {
+    display: block;
+}
+
+fieldset {
+
+    @media @desktop, @tablet {
+        label {
+            float:left;
+            width: 160px;
+            display:block;
+            padding: 10px;
+            margin: 2px;
+            text-align: right;
+        }
+
+        input[type=text], input[type=password], textarea, select {
+            float: left;
+        }
+    }
+}
