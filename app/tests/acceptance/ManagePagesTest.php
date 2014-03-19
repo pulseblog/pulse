@@ -39,7 +39,7 @@ class ManagePagesTest extends AcceptanceTestCase {
         $this->i_visit_url('admin/pages/create');
 
         // Then
-        $this->i_expect_to_save_the_post([
+        $this->i_expect_to_create_the_post([
             'title' => 'A New Page',
             'slug' => 'a-new-page',
             'lean_content' => 'The lean content',
@@ -49,6 +49,38 @@ class ManagePagesTest extends AcceptanceTestCase {
         // When
         $this->i_submit_form_with('form', [
             'title' => 'A New Page',
+            'slug' => 'a-new-page',
+            'lean_content' => 'The lean content',
+            'content' => 'The whole content',
+        ]);
+    }
+
+    /**
+     * Scenario: Edit an existing page
+     * @return void
+     */
+    public function testShouldEditPage()
+    {
+        // Given
+        $this->im_logged_in();
+
+        // And
+        $this->site_has_pages();
+
+        // And
+        $this->i_visit_url('admin/page/1/edit');
+
+        // Then
+        $this->i_expect_to_update_the_post(1, [
+            'title' => 'Sample Page Edited',
+            'slug' => 'a-new-page',
+            'lean_content' => 'The lean content',
+            'content' => 'The whole content',
+        ]);
+
+        // When
+        $this->i_submit_form_with('form', [
+            'title' => 'Sample Page Edited',
             'slug' => 'a-new-page',
             'lean_content' => 'The lean content',
             'content' => 'The whole content',
@@ -83,6 +115,7 @@ class ManagePagesTest extends AcceptanceTestCase {
         $pages[0]->lean_content = 'a sample page a';
         $pages[0]->content = 'the sample page a';
         $pages[0]->author_id = 1;
+        $pages[0]->id = 1;
 
         $pages[1] = App::make('Pulse\Cms\Page');
         $pages[1]->title = 'Sample Page B';
@@ -90,13 +123,21 @@ class ManagePagesTest extends AcceptanceTestCase {
         $pages[1]->lean_content = 'a sample page b';
         $pages[1]->content = 'the sample page b';
         $pages[1]->author_id = 1;
+        $pages[0]->id = 2;
 
         $repo = m::mock('Pulse\Cms\PageRepository');
 
         // Expectations
         $repo->shouldReceive('all')
-            ->once()
             ->andReturn($pages);
+
+        $repo->shouldReceive('findOrFail')
+            ->with(1)
+            ->andReturn($pages[0]);
+
+        $repo->shouldReceive('findOrFail')
+            ->with(2)
+            ->andReturn($pages[1]);
 
         App::instance('Pulse\Cms\PageRepository', $repo);
     }
@@ -113,7 +154,13 @@ class ManagePagesTest extends AcceptanceTestCase {
         $this->assertContains('Sample Page B', $this->client->getResponse()->getContent());
     }
 
-    protected function i_expect_to_save_the_post($postAttributes)
+    /**
+     * Sets a expectation in the PageRepository to receive the 'createNew'
+     * method
+     * @param  array $pageAttributes The attributes of the page
+     * @return void
+     */
+    protected function i_expect_to_create_the_post($pageAttributes)
     {
         // Set
         $repo = m::mock('Pulse\Cms\PageRepository');
@@ -121,9 +168,35 @@ class ManagePagesTest extends AcceptanceTestCase {
         // Expectation
         $repo->shouldReceive('createNew')
             ->once()
-            ->andReturnUsing(function($realInput, $user) use ($postAttributes) {
-                foreach ($postAttributes as $key => $value) {
-                    if($postAttributes[$key] != $realInput[$key]) {
+            ->andReturnUsing(function($realInput, $user) use ($pageAttributes) {
+                foreach ($pageAttributes as $key => $value) {
+                    if($pageAttributes[$key] != $realInput[$key]) {
+                        return false;
+                    }
+                }
+                return new Pulse\Cms\Page;
+            });
+
+        App::instance('Pulse\Cms\PageRepository', $repo);
+    }
+
+    /**
+     * Sets a expectation in the PageRepository to receive the 'createNew'
+     * method
+     * @param  array $pageAttributes The attributes of the page
+     * @return void
+     */
+    protected function i_expect_to_update_the_post($pageId, $pageAttributes)
+    {
+        // Set
+        $repo = m::mock('Pulse\Cms\PageRepository');
+
+        // Expectation
+        $repo->shouldReceive('update')
+            ->once()
+            ->andReturnUsing(function($pageId, $realInput) use ($pageAttributes) {
+                foreach ($pageAttributes as $key => $value) {
+                    if($pageAttributes[$key] != $realInput[$key]) {
                         return false;
                     }
                 }

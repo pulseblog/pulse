@@ -63,7 +63,7 @@ class PagesController extends Controller {
 
         $page = $this->pageRepository->createNew($input, $user);
 
-        if (! $page->errors()) {
+        if (count($page->errors()) == 0) {
             return Redirect::action(
                         'Pulse\Backend\PagesController@edit',
                         ['id' => $page->id ]
