@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package  Pulse\Base
  */
-class DomainObject extends Model
+abstract class DomainObject extends Model
 {
     /**
      * Error message bag
