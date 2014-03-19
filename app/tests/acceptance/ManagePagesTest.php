@@ -3,27 +3,24 @@
 use Mockery as m;
 
 /**
- * Feature: As an user I would like to see the list of blog posts
+ * Feature: As an administrator I would like to manage the cms pages
  */
-class SeePostListTest extends AcceptanceTestCase {
+class ManagePagesTest extends AcceptanceTestCase {
 
     /**
-     * Scenario: Simply visit the home page or post list
+     * Scenario: Index all existing posts
      * @return void
      */
-    public function testSimplyVisitPostList()
+    public function testViewPostList()
     {
         // Given
         $this->site_has_posts();
 
         // When
-        $this->i_visit_url('/');
+        $this->i_visit_url('admin/pages');
 
         // Then
         $this->i_should_see_post_list();
-
-        // And
-        $this->i_should_see_post_links();
     }
 
     /**
@@ -51,14 +48,14 @@ class SeePostListTest extends AcceptanceTestCase {
         $posts[1]->content = 'the sample post b';
         $posts[1]->author_id = 1;
 
-        $repo = m::mock('Pulse\Cms\PostRepository');
+        $repo = m::mock('Pulse\Cms\PageRepository');
 
         // Expectations
         $repo->shouldReceive('all')
             ->once()
             ->andReturn($posts);
 
-        App::instance('Pulse\Cms\PostRepository', $repo);
+        App::instance('Pulse\Cms\PageRepository', $repo);
     }
 
     /**
@@ -71,27 +68,5 @@ class SeePostListTest extends AcceptanceTestCase {
 
         $this->assertContains('Sample Post A', $this->client->getResponse()->getContent());
         $this->assertContains('Sample Post B', $this->client->getResponse()->getContent());
-    }
-
-    /**
-     * Asserts if user sees links for the posts
-     * @return void
-     */
-    protected function i_should_see_post_links()
-    {
-        $postAUrl = URL::action('Pulse\Frontend\CmsController@showPost', ['slug'=>'sample_post_a']);
-        $postBUrl = URL::action('Pulse\Frontend\CmsController@showPost', ['slug'=>'sample_post_b']);
-
-        $this->assertContains($postAUrl, $this->client->getResponse()->getContent());
-        $this->assertContains($postBUrl, $this->client->getResponse()->getContent());
-    }
-
-    /**
-     * Closes mockery expectations
-     * @return void
-     */
-    public function tearDown()
-    {
-        m::close();
     }
 }
