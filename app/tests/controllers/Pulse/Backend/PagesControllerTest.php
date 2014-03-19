@@ -170,7 +170,7 @@ class PagesControllerTest extends TestCase
     public function testShouldUpdateAPage()
     {
         // Set
-        $page = m::mock('Pulse\Cms\Page[error]');
+        $page = m::mock('Pulse\Cms\Page[errors]');
         $page->shouldReceive('errors')
             ->once()
             ->andReturn([]);

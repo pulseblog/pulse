@@ -1,6 +1,6 @@
 <?php namespace Pulse\Cms;
 
-use Eloquent;
+use Pulse\Base\DomainObject;
 
 /**
  * Page Class
@@ -9,7 +9,7 @@ use Eloquent;
  *
  * @package Pulse\Cms
  */
-class Page extends Eloquent
+class Page extends DomainObject
 {
     /**
      * The database table used by the model.
