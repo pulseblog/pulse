@@ -55,6 +55,11 @@ class ManagePagesTest extends AcceptanceTestCase {
         ]);
     }
 
+    /**
+     * Mocks the Confide::user method in order to simulates that there is an
+     * User logged in
+     * @return void
+     */
     protected function im_logged_in()
     {
         Confide::shouldReceive('user')
