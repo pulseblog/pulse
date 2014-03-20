@@ -39,7 +39,7 @@ class ManagePagesTest extends AcceptanceTestCase {
         $this->i_visit_url('admin/pages/create');
 
         // Then
-        $this->i_expect_to_create_the_post([
+        $this->i_expect_to_create_the_page([
             'title' => 'A New Page',
             'slug' => 'a-new-page',
             'lean_content' => 'The lean content',
@@ -71,7 +71,7 @@ class ManagePagesTest extends AcceptanceTestCase {
         $this->i_visit_url('admin/page/1/edit');
 
         // Then
-        $this->i_expect_to_update_the_post(1, [
+        $this->i_expect_to_update_the_page(1, [
             'title' => 'Sample Page Edited',
             'slug' => 'a-new-page',
             'lean_content' => 'The lean content',
@@ -85,6 +85,28 @@ class ManagePagesTest extends AcceptanceTestCase {
             'lean_content' => 'The lean content',
             'content' => 'The whole content',
         ]);
+    }
+
+    /**
+     * Scenario: Destroy an existing page
+     * @return void
+     */
+    public function testShouldDestroyPage()
+    {
+        // Given
+        $this->im_logged_in();
+
+        // And
+        $this->site_has_pages();
+
+        // And
+        $this->i_visit_url('admin/page/1/edit');
+
+        // Then
+        $this->i_expect_to_delete_the_page(1);
+
+        // When
+        $this->i_click_the_link('a[method="delete"]');
     }
 
     /**
@@ -123,7 +145,7 @@ class ManagePagesTest extends AcceptanceTestCase {
         $pages[1]->lean_content = 'a sample page b';
         $pages[1]->content = 'the sample page b';
         $pages[1]->author_id = 1;
-        $pages[0]->id = 2;
+        $pages[1]->id = 2;
 
         $repo = m::mock('Pulse\Cms\PageRepository');
 
@@ -160,7 +182,7 @@ class ManagePagesTest extends AcceptanceTestCase {
      * @param  array $pageAttributes The attributes of the page
      * @return void
      */
-    protected function i_expect_to_create_the_post($pageAttributes)
+    protected function i_expect_to_create_the_page($pageAttributes)
     {
         // Set
         $repo = m::mock('Pulse\Cms\PageRepository');
@@ -183,10 +205,11 @@ class ManagePagesTest extends AcceptanceTestCase {
     /**
      * Sets a expectation in the PageRepository to receive the 'createNew'
      * method
+     * @param  integer $pageId The id of the page to expect
      * @param  array $pageAttributes The attributes of the page
      * @return void
      */
-    protected function i_expect_to_update_the_post($pageId, $pageAttributes)
+    protected function i_expect_to_update_the_page($pageId, $pageAttributes)
     {
         // Set
         $repo = m::mock('Pulse\Cms\PageRepository');
@@ -202,6 +225,25 @@ class ManagePagesTest extends AcceptanceTestCase {
                 }
                 return new Pulse\Cms\Page;
             });
+
+        App::instance('Pulse\Cms\PageRepository', $repo);
+    }
+
+    /**
+     * Sets a expectation in the PageRepository to receive the 'delete'
+     * method with the given id
+     * @param  integer $pageId The id of the page to expect
+     * @return void
+     */
+    protected function i_expect_to_delete_the_page($pageId)
+    {
+        // Set
+        $repo = m::mock('Pulse\Cms\PageRepository');
+
+        // Expectation
+        $repo->shouldReceive('delete')
+            ->once()
+            ->with($pageId);
 
         App::instance('Pulse\Cms\PageRepository', $repo);
     }

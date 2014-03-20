@@ -41,6 +41,7 @@
             <div class='well'>
                 {{ Form::submit('Salvar Pagina') }}
                 {{ link_to_action('Pulse\Backend\PagesController@index', 'Cancelar', null, ['class'=>'btn is-inverted']) }}
+                {{ link_to_action('Pulse\Backend\PagesController@destroy', 'Excluir', ['id'=>$page->id], ['method'=>'delete', 'class'=>'btn is-danger']) }}
             </div>
 
         {{ Form::close() }}
