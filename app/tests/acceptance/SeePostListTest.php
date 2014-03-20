@@ -5,7 +5,7 @@ use Mockery as m;
 /**
  * Feature: As an user I would like to see the list of blog posts
  */
-class SeePostList extends AcceptanceTestCase {
+class SeePostListTest extends AcceptanceTestCase {
 
     /**
      * Scenario: Simply visit the home page or post list
@@ -35,6 +35,7 @@ class SeePostList extends AcceptanceTestCase {
     {
         // Definition
         $posts = array();
+        $page = 1;
 
         $posts[0] = App::make('Pulse\Cms\Post');
         $posts[0]->title = 'Sample Post A';
@@ -54,7 +55,7 @@ class SeePostList extends AcceptanceTestCase {
 
         // Expectations
         $repo->shouldReceive('all')
-            ->once()->with()
+            ->once()
             ->andReturn($posts);
 
         App::instance('Pulse\Cms\PostRepository', $repo);

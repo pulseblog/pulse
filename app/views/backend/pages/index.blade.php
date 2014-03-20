@@ -13,7 +13,7 @@
             {{ link_to_action('Pulse\Backend\PagesController@create', 'Criar página', null, ['class'=>'btn']) }}
         </div>
 
-        @if ( $pages && $pages->count() > 0 )
+        @if ( $pages && count($pages) > 0 )
             <table>
                 <thead>
                     <tr>

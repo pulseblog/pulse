@@ -1,6 +1,17 @@
 <?php
 
+use Mockery as m;
+
 abstract class AcceptanceTestCase extends TestCase {
+
+    /**
+     * Closes mockery expectations
+     * @return void
+     */
+    public function tearDown()
+    {
+        m::close();
+    }
 
     /**
      * Feeds the crawler with the visited page
@@ -42,6 +53,16 @@ abstract class AcceptanceTestCase extends TestCase {
             strtolower($text),
             strtolower($this->client->getResponse()->getContent())
         );
+    }
+
+    /**
+     * Asserts if the user was redirected to the given url
+     * @param  string $url Url
+     * @return void
+     */
+    protected function i_should_be_redirected_to($url)
+    {
+        $this->assertRedirectedTo($url);
     }
 
     /**

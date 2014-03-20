@@ -54,13 +54,19 @@ class UserAuthenticationTest extends AcceptanceTestCase {
     protected function i_expect_to_become_logged_as($input)
     {
         // Definition
-        $input['_token'] = '';
         $repo = m::mock('Pulse\User\Repository');
 
         // Expectation
         $repo->shouldReceive('login')
-            ->with($input)->once()
-            ->andReturn(true);
+            ->once()
+            ->andReturnUsing(function($realInput) use ($input) {
+                foreach ($input as $key => $value) {
+                    if($input[$key] != $realInput[$key]) {
+                        return false;
+                    }
+                }
+                return true;
+            });
 
         App::instance('Pulse\User\Repository', $repo);
     }
