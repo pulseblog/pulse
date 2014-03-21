@@ -4,7 +4,7 @@
         <a href="#">Dashboard</a>
     </li>
     <li>
-        <a href="#">Posts</a>
+        {{ link_to_action('Pulse\Backend\PostsController@index', 'Posts') }}
     </li>
     <li>
         {{ link_to_action('Pulse\Backend\PagesController@index', 'Pages') }}

@@ -10,7 +10,7 @@
 @section ('content')
     <div class="l-block-1">
         <div class='toolbar'>
-            {{ link_to_action('Pulse\Backend\PostsController@create', 'Criar página', null, ['class'=>'btn']) }}
+            {{ link_to_action('Pulse\Backend\PostsController@create', 'Nova postagem', null, ['class'=>'btn']) }}
         </div>
 
         @if ( $posts && count($posts) > 0 )
@@ -55,7 +55,7 @@
         @else
             <div class='well'>
                 Não existe nenhum post,
-                {{ link_to_action('Pulse\Backend\PostsController@create', 'crie a primeira!') }}
+                {{ link_to_action('Pulse\Backend\PostsController@create', 'crie o primeiro!') }}
             </div>
         @endif
     </div>
