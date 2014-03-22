@@ -11,7 +11,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "*",
-		"satooshi/php-coveralls": "dev-master"
+		"satooshi/php-coveralls": "dev-master",
+		"squizlabs/php_codesniffer": "1.*"
 	},
 	"autoload": {
 		"classmap": [
