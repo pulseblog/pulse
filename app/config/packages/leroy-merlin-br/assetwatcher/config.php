@@ -36,5 +36,18 @@ return array(
             exec($cd.' lessc '.$from.' > '.$to);
         },
 
+        '../*.png' => function($file) {
+
+            // Moving images --------------------------------
+            echo "Moving images ...\n";
+
+            $cd = 'cd '.app_path().'/assets/img;';
+            $from =  app_path(). '/assets/img';
+            $to = app_path().'/../public/assets';
+
+            exec('cp -r '.$from.' '.$to);
+
+            echo "Moved ...\n";
+        },
     )
 );
