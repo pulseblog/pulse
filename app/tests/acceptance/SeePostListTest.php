@@ -51,14 +51,21 @@ class SeePostListTest extends AcceptanceTestCase {
         $posts[1]->content = 'the sample post b';
         $posts[1]->author_id = 1;
 
-        $repo = m::mock('Pulse\Cms\PostRepository');
+        $repo     = m::mock('Pulse\Cms\PostRepository');
+        $pageRepo = m::mock('Pulse\Cms\PageRepository');
+
 
         // Expectations
         $repo->shouldReceive('all')
             ->once()
             ->andReturn($posts);
 
+        $pageRepo->shouldReceive('all')
+            ->once()
+            ->andReturn([]);
+
         App::instance('Pulse\Cms\PostRepository', $repo);
+        App::instance('Pulse\Cms\PageRepository', $pageRepo);
     }
 
     /**

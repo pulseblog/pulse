@@ -24,7 +24,7 @@ class PageRepository
      * @param  integer $pagination Pagination value
      * @return Illuminate\Pagination\Paginator
      */
-    public function all($pagination)
+    public function all($pagination = 0)
     {
         $instance = App::make($this->domainObject);
 

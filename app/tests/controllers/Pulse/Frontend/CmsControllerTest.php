@@ -14,16 +14,22 @@ class CmsControllerTest extends TestCase
     public function testShouldIndexPosts()
     {
         // Definitions
-        $pagination = 2;
+        $pagination  = 2;
         $postsCursor = [];
-        $repo = m::mock('Pulse\Cms\PostRepository');
+        $repo        = m::mock('Pulse\Cms\PostRepository');
+        $pageRepo    = m::mock('Pulse\Cms\PageRepository');
 
         // Expectations
         $repo->shouldReceive('all')
             ->once()->with($pagination)
             ->andReturn($postsCursor);
 
+        $pageRepo->shouldReceive('all')
+            ->once()
+            ->andReturn([]);
+
         App::instance('Pulse\Cms\PostRepository', $repo);
+        App::instance('Pulse\Cms\PageRepository', $pageRepo);
 
         // Request
         $this->action('GET', 'Pulse\Frontend\CmsController@indexPosts', ['page'=>$pagination]);

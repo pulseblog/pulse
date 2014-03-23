@@ -24,11 +24,13 @@ class CmsController extends Controller
          */
         $page = Input::get('page', 1);
 
-        $repo = App::make('Pulse\Cms\PostRepository');
+        $repo     = App::make('Pulse\Cms\PostRepository');
+        $pageRepo = App::make('Pulse\Cms\PageRepository');
 
         $posts = $repo->all($page);
+        $pages = $pageRepo->all();
 
-        return View::make('front.posts.index', compact('posts'));
+        return View::make('front.posts.index', compact('posts', 'pages'));
     }
 
     /**
