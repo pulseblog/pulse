@@ -1,0 +1,376 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+/**
+ * This project uses smacss in order to keep
+ * the stylesheets organized.
+ *
+ * For more details:
+ * http://smacss.com/book/categorizing
+ */
+/**
+ * Import mixins
+ *
+ * A set of useful LESS mixins
+ */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/**
+ * Import base rules
+ *
+ * Base styles include setting heading sizes,
+ * default link styles, default font styles,
+ * and body backgrounds.
+ */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/**
+ * Import layout rules
+ *
+ * These rules serves as a grid to orient the
+ * element placement.
+ */
+/**
+ * general.less
+ *
+ * These rules defines the orientation and
+ * the placement of general elements.
+ */
+/*******************************************
+* Media queries
+********************************************/
+/*******************************************
+* Layout
+********************************************/
+#top-horizontal {
+  display: block;
+  height: 162px;
+}
+@media only screen and (min-width: 720px) and (max-width: 1079px) {
+  #top-horizontal {
+    height: 80px;
+  }
+}
+@media only screen and (max-width: 719px) {
+  #top-horizontal {
+    height: 38px;
+  }
+}
+l-horizontal {
+  display: block;
+  width: 100%;
+}
+#wrapper {
+  min-height: 50%;
+  margin: 20px 0 40px 0;
+}
+@media only screen and (min-width: 1080px) {
+  #wrapper {
+    margin: 20px 0 80px 0;
+  }
+}
+#footer {
+  display: block;
+}
+/**
+ * grid.less
+ *
+ * A simple grid system used to place blocks
+ * of elements in a responsive way.
+ */
+/*******************************************
+* Grid classes
+********************************************/
+.l-block-container {
+  /**
+     * The .l-block-container may have a number
+     * of l-block-n elements where 'n' means how
+     * many columns are going to be placed in
+     * a single line.
+     */
+  width: 1080px;
+  margin: auto;
+  overflow: hidden;
+  /**
+     * .centered is a special class that
+     * allow a grid piece to be centered within
+     * a l-block-container
+     */
+}
+.l-block-container .l-block-1,
+.l-block-container .l-block-2,
+.l-block-container .l-block-3,
+.l-block-container .l-block-4,
+.l-block-container .l-block-5,
+.l-block-container .l-block-6,
+.l-block-container .l-block-7,
+.l-block-container .l-block-8 {
+  float: left;
+  padding: 10px;
+}
+.l-block-container .l-block-1 {
+  width: 1060px;
+}
+.l-block-container .l-block-2 {
+  width: 520px;
+}
+.l-block-container .l-block-3 {
+  width: 340px;
+}
+.l-block-container .l-block-4 {
+  width: 250px;
+}
+.l-block-container .l-block-5 {
+  width: 196px;
+}
+.l-block-container .l-block-6 {
+  width: 160px;
+}
+.l-block-container .l-block-7 {
+  width: 134px;
+}
+.l-block-container .l-block-8 {
+  width: 115px;
+}
+.l-block-container .l-centered {
+  float: none;
+  margin: auto;
+}
+@media only screen and (min-width: 720px) and (max-width: 1079px) {
+  .l-block-container {
+    /**
+         * In the tablet media query, display
+         * max of two blocks per line.
+         */
+    width: 100%;
+    /**
+         * .centered is a special class that
+         * allow a grid piece to be centered within
+         * a l-block-container
+         */
+  }
+  .l-block-container .l-block-1,
+  .l-block-container .l-block-2,
+  .l-block-container .l-block-3,
+  .l-block-container .l-block-4,
+  .l-block-container .l-block-5,
+  .l-block-container .l-block-6,
+  .l-block-container .l-block-7,
+  .l-block-container .l-block-8 {
+    margin: 0;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    padding: 20px;
+  }
+  .l-block-container .l-block-1 {
+    width: 100%;
+  }
+  .l-block-container .l-centered {
+    float: none;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 719px) {
+  .l-block-container {
+    /**
+         * In the phone media query, display
+         * a single block per line.
+         */
+    width: 100%;
+    margin: 0;
+  }
+  .l-block-container .l-block-1,
+  .l-block-container .l-block-2,
+  .l-block-container .l-block-3,
+  .l-block-container .l-block-4,
+  .l-block-container .l-block-5,
+  .l-block-container .l-block-6,
+  .l-block-container .l-block-7,
+  .l-block-container .l-block-8 {
+    margin: 0;
+    padding: 10px;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 30px;
+  }
+}
+body,
+html {
+  height: 100%;
+  font-family: 'Ubuntu', Arial, sans-serif;
+}
+#l-sidebar {
+  height: 100%;
+  width: 25%;
+  margin: 0;
+  display: inline-block;
+  position: fixed;
+}
+#l-content {
+  width: 62.6%;
+  padding: 20px;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+.m-sidebar {
+  padding: 20px;
+  -webkit-box-shadow: 10px 0px 1px #eeeeee;
+  -moz-box-shadow: 10px 0px 1px #eeeeee;
+  box-shadow: 10px 0px 1px #eeeeee;
+}
+.m-sidebar .logo img {
+  width: 100%;
+}
+.m-sidebar .pages {
+  text-align: center;
+}
+.m-sidebar .page-item {
+  padding: 10px 0px;
+  color: #858585;
+}
+.m-sidebar .page-item:hover {
+  padding: 10px 0px;
+  color: black;
+}
+.m-no-post-found {
+  position: relative;
+  text-align: center;
+  font-size: 50px;
+  min-height: 100%;
+}

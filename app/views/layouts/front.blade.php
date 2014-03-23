@@ -11,6 +11,12 @@
     </head>
 
     <body>
+        <div id="l-sidebar" class="m-sidebar">
+            @include('front.components._sidebar')
+        </div>
 
+        <div id="l-content" class="m-content">
+            @yield('content')
+        </div>
     </body>
 </html>
