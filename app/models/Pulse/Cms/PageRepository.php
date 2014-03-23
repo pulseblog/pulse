@@ -75,7 +75,7 @@ class PageRepository
      */
     public function createNew($input, $user)
     {
-        $page = App::make('Pulse\Cms\Page');
+        $page = App::make($this->domainObject);
 
         $page->title        = array_get($input, 'title');
         $page->slug         = array_get($input, 'slug');

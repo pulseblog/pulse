@@ -48,6 +48,11 @@ input[type=submit], button, .btn {
         &:hover{ background-color: lighten(@colorSecond, 10%); }
     }
 
+    &.is-danger {
+        background-color: @colorDanger;
+        &:hover{ background-color: lighten(@colorDanger, 10%); }
+    }
+
     &[disabled], &.disabled, &.is-disabled {
         background-color: @colorLightGray;
         color: lighten(@colorLightGray, 40%);

@@ -16,11 +16,30 @@ abstract class AcceptanceTestCase extends TestCase {
     /**
      * Feeds the crawler with the visited page
      * @param  string $url Url
+     * @param  string $method HTTP Verb. IE: "GET", "POST", "DELETE", etc.
      * @return void
      */
-    protected function i_visit_url($url)
+    protected function i_visit_url($url, $method = 'GET')
     {
-        $this->crawler = $this->client->request('GET', $url);
+        $this->crawler = $this->client->request($method, $url);
+    }
+
+    /**
+     * Simulates a click in a link. It will basically get the "href" and the
+     * "method" attributes of the element found with the $linkSelector and then
+     * call i_visit_url() with the url and HTTP verb found.
+     * @param  string $linkSelector DOM Element selector
+     * @return void
+     */
+    protected function i_click_the_link($linkSelector)
+    {
+        $link = $this->crawler->filter($linkSelector)
+            ->first();
+
+        $url = $link->attr('href');
+        $method = strtoupper($link->attr('method') ?: 'get');
+
+        $this->i_visit_url($url, $method);
     }
 
     /**
