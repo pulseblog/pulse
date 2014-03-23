@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 /**
  * This project uses smacss in order to keep
  * the stylesheets organized.
@@ -341,7 +342,7 @@ html {
   position: fixed;
 }
 #l-content {
-  width: 62.6%;
+  width: 66.3%;
   padding: 20px;
   margin: 0;
   display: inline-block;
@@ -350,9 +351,7 @@ html {
 }
 .m-sidebar {
   padding: 20px;
-  -webkit-box-shadow: 10px 0px 1px #eeeeee;
-  -moz-box-shadow: 10px 0px 1px #eeeeee;
-  box-shadow: 10px 0px 1px #eeeeee;
+  border-right: 1px solid #eeeeee;
 }
 .m-sidebar .logo img {
   width: 100%;
@@ -366,11 +365,58 @@ html {
 }
 .m-sidebar .page-item:hover {
   padding: 10px 0px;
-  color: black;
+  color: #000000;
 }
 .m-no-post-found {
   position: relative;
   text-align: center;
   font-size: 50px;
   min-height: 100%;
+}
+.m-post-container {
+  border-bottom: 1px solid #eeeeee;
+  margin-bottom: 20px;
+  padding: 20px 10px 20px 0;
+}
+.m-post-title {
+  font-family: 'Lato';
+  font-size: 32px;
+  text-decoration: none;
+  display: block;
+  color: #163757;
+  margin-bottom: 10px;
+}
+.m-post-title:hover {
+  color: #3b8eb9;
+}
+.m-post-read-more {
+  padding: 15px 10px;
+  border: 1px solid #eeeeee;
+  text-decoration: none;
+  display: inline-block;
+  color: #000000;
+  -webkit-border-top-right-radius: 2px;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 2px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.m-post-short-content {
+  padding: 0 0 20px 0;
+}
+.published-at {
+  font-weight: bold;
+}
+.m-post-image {
+  margin: 20px 0;
 }

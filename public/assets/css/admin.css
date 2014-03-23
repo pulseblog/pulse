@@ -596,8 +596,6 @@ button.is-information:hover,
 .btn.is-information:hover {
   background-color: #d3a11d;
 }
-<<<<<<< HEAD
-=======
 input[type=submit].is-danger,
 button.is-danger,
 .btn.is-danger {
@@ -608,7 +606,6 @@ button.is-danger:hover,
 .btn.is-danger:hover {
   background-color: #ee8475;
 }
->>>>>>> 77d9894fbfd8ac48163887ec069e9c79797db052
 input[type=submit][disabled],
 button[disabled],
 .btn[disabled],

@@ -1,6 +1,6 @@
 
 <span class="logo">
-    {{ HTML::image('assets/img/logo.png', $alt="Pulse" ) }}
+    {{ HTML::image('assets/img/small-logo.png', $alt="Pulse" ) }}
 </span>
 
 <ul class="pages">

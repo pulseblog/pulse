@@ -84,7 +84,6 @@ class PageRepository
         $page->author_id    = $user->id;
 
         $page->save();
-
         return $page;
     }
 

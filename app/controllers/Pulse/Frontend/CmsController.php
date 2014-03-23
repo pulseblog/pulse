@@ -22,7 +22,7 @@ class CmsController extends Controller
          * The page
          * @var integer
          */
-        $page = Input::get('page', 1);
+        $page = Input::get('page', 0);
 
         $repo     = App::make('Pulse\Cms\PostRepository');
         $pageRepo = App::make('Pulse\Cms\PageRepository');
