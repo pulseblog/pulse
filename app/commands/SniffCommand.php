@@ -74,6 +74,8 @@ class SniffCommand extends Command {
      */
     protected function formatLine($text)
     {
+        $text = str_replace('|', $this->colorize('dark_gray', '|'), $text);
+
         if (strstr($text, '---------')) {
             return $this->colorize('dark_gray', $text);
         } elseif (strstr($text, 'FILE: ')) {
