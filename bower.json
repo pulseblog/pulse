@@ -1,0 +1,22 @@
+{
+  "name": "pulse",
+  "homepage": "https://github.com/Zizaco/pulse",
+  "description": "A blogging platform made with Laravel",
+  "dependencies": {
+    "jquery": "latest",
+    "epiceditor": "latest"
+  },
+  "authors": [
+    "Zizaco",
+    "GuilhermeGuitte"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
