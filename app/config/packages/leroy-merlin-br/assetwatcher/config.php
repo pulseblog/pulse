@@ -15,7 +15,7 @@ return array(
     */
     'files_to_watch' => array(
 
-        '../*.less' => function($file) {
+        'assets/*.less' => function($file) {
 
             // Compilling front.less --------------------------------
             echo "Compiling 'front.less'...\n";
@@ -36,7 +36,7 @@ return array(
             exec($cd.' lessc '.$from.' > '.$to);
         },
 
-        '../*.png' => function($file) {
+        'assets/img/*' => function($file) {
 
             // Moving images --------------------------------
             echo "Moving images ...\n";
