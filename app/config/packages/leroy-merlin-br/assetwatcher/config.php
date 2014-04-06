@@ -46,8 +46,32 @@ return array(
             $to = app_path().'/../public/assets';
 
             exec('cp -r '.$from.' '.$to);
+        },
 
-            echo "Moved ...\n";
+        'assets/js/*' => function($file) {
+
+            // Moving js files -------------------------------
+            echo "Updating js in public folder.\n";
+
+            $cd = 'cd '.app_path().'/assets/js;';
+            $from =  app_path(). '/assets/js';
+            $to = app_path().'/../public/assets';
+
+            exec('cp -r '.$from.' '.$to);
+        },
+
+        'assets/vendor/*' => function($file) {
+
+            // Moving vendor -----------------------------
+            echo "Updating vendor in public folder.\n";
+
+            $from =  app_path(). '/assets/vendor/jquery/dist/jquery.min.js';
+            $to = app_path().'/../public/assets/js/vendor/jquery.min.js';
+            exec('cp -r '.$from.' '.$to);
+
+            $from =  app_path(). '/assets/vendor/epiceditor/epiceditor/js/epiceditor.js';
+            $to = app_path().'/../public/assets/js/vendor/epiceditor.min.js';
+            exec('cp -r '.$from.' '.$to);
         },
     )
 );
