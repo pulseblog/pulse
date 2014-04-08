@@ -4,7 +4,7 @@
   "description": "A blogging platform made with Laravel",
   "dependencies": {
     "jquery": "latest",
-    "epiceditor": "latest"
+    "screenfull": "latest"
   },
   "authors": [
     "Zizaco",
