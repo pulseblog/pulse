@@ -28,7 +28,7 @@
 
     <fieldset>
         {{ Form::label('content', trans('resources.attributes.Page.content')) }}
-        {{ Form::textarea('content') }}
+        {{ Form::textarea('content', null, ['data-module'=>'MarkdownEditor']) }}
     </fieldset>
 
     <div class='well'>

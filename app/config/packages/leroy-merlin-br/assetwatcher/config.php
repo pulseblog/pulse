@@ -62,15 +62,15 @@ return array(
 
         'assets/vendor/*' => function($file) {
 
-            // Moving vendor -----------------------------
+            // Moving vendor files -----------------------------
             echo "Updating vendor in public folder.\n";
 
             $from =  app_path(). '/assets/vendor/jquery/dist/jquery.min.js';
             $to = app_path().'/../public/assets/js/vendor/jquery.min.js';
             exec('cp -r '.$from.' '.$to);
 
-            $from =  app_path(). '/assets/vendor/epiceditor/epiceditor/js/epiceditor.js';
-            $to = app_path().'/../public/assets/js/vendor/epiceditor.min.js';
+            $from =  app_path(). '/assets/vendor/screenfull/dist/screenfull.min.js';
+            $to = app_path().'/../public/assets/js/vendor/screenfull.min.js';
             exec('cp -r '.$from.' '.$to);
         },
     )
