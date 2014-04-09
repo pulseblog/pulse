@@ -1,9 +1,6 @@
 /**
  * TestSuite for App (app.js)
  */
-
-//eval(fs.readFileSync('./app/assets/js/app.js')+'');
-
 describe('App', function() {
 
     var app = null;
@@ -13,6 +10,7 @@ describe('App', function() {
     });
 
     afterEach(function() {
+        // "Closes" the mocks
         sinon.restore();
     })
 
