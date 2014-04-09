@@ -10,16 +10,15 @@
  *     // Will run `ModuleName($el)` constructor where $el is the
  *     // span element itself.
  *
- * @type {Object}
+ * @type {function}
  */
-function App() {}
+App = function App() {}
 
 /**
  * Initializes the application
  * @return {boolean} Successful
  */
 App.prototype.init = function() {
-	this.log('initializing application...');
 	return this.run();
 };
 
@@ -80,7 +79,7 @@ App.prototype.initModule = function ($el, moduleNames) {
  * @return {void}
  */
 App.prototype.log = function(content) {
-	if (typeof window.console !== 'undefined') {
+	if (typeof window === 'object' && typeof window.console !== 'undefined') {
 		window.console.log(content);
 	}
 };
