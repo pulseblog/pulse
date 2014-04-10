@@ -20,5 +20,8 @@
         <testsuite name="acceptance">
             <directory suffix=".php">./app/tests/acceptance</directory>
         </testsuite>
+        <testsuite name="library">
+            <directory suffix=".php">./app/tests/libraries</directory>
+        </testsuite>
     </testsuites>
 </phpunit>

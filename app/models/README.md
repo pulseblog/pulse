@@ -2,7 +2,7 @@
 
 > Model Layer is where the business logic resides.
 
-The components domain objects and services are organized in namespaces (and directories) that describe to which subject they relate to.
+The models are organized in namespaces (and directories) that describe to which subject they relate to.
 
 In order to understand the **Model Layer** of Pulse is important to make the following terminology clear:
 
