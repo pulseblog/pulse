@@ -23,7 +23,7 @@ describe('App', function() {
 
             // Assertion
             assert.equal(true, app.init());
-            app.run.verify();
+            sinon.verify();
         })
     });
 
