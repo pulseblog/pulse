@@ -27,6 +27,12 @@ class SniffCommand extends Command {
     private $colors = array();
 
     /**
+     * The exit code of the command
+     * @var integer
+     */
+    protected $exitCode = 0;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -61,10 +67,41 @@ class SniffCommand extends Command {
      */
     public function fire()
     {
-        exec('./vendor/bin/phpcs --standard=PSR2 -p app/models app/controllers', $output);
-        foreach ($output as $line) {
+        $output = $this->runSniffer();
+
+        foreach (explode("\n", $output) as $line) {
             echo $this->formatLine($line)."\n";
         }
+
+        exit($this->exitCode);
+    }
+
+    /**
+     * Include, instantiate and run PHP_CodeSniffer
+     * @return string Text output
+     */
+    public function runSniffer()
+    {
+        include app_path().'/../vendor/squizlabs/php_codesniffer/CodeSniffer/CLI.php';
+
+        $phpcs = $this->getLaravel()->make("PHP_CodeSniffer_CLI");
+        $phpcs->checkRequirements();
+
+        $options = [
+            'standard'=>['PSR2'],
+            'files'=>['app/models', 'app/controllers']
+        ];
+
+        ob_start();
+        $numErrors = $phpcs->process($options);
+        $output = ob_get_contents();
+        ob_end_clean();
+
+        if ($numErrors != 0) {
+            $this->exitCode = 1;
+        }
+
+        return $output;
     }
 
     /**
