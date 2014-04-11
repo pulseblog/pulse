@@ -108,6 +108,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider',
 		'LeroyMerlin\AssetWatcher\AssetWatcherServiceProvider',
+		'LeroyMerlin\LaraSniffer\ServiceProvider',
 	),
 
 	/*
