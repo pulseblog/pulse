@@ -9,7 +9,7 @@ _A blogging platform made with Laravel_
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Pulse is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ## Aditional information
 
