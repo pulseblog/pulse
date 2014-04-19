@@ -12,7 +12,7 @@
  *
  * @type {function}
  */
-App = function App() {}
+App = function App() {};
 
 /**
  * Initializes the application
@@ -65,7 +65,7 @@ App.prototype.initModule = function ($el, moduleNames) {
 
 	while(i--) {
 		if (typeof window[moduleNames[i]] === 'function') {
-			new window[moduleNames[i]]($el);
+			return new window[moduleNames[i]]($el);
 		} else {
 			throw "constructor or function '"+ moduleNames[i] + "' is not defined.";
 		}
@@ -80,6 +80,6 @@ App.prototype.initModule = function ($el, moduleNames) {
  */
 App.prototype.log = function(content) {
 	if (typeof window === 'object' && typeof window.console !== 'undefined') {
-		window.console.log(content);
+		return window.console.log(content);
 	}
 };
