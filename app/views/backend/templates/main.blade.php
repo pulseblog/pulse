@@ -18,10 +18,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="{{ asset('assets/js/vendor/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/vendor/screenfull.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/app.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/markdown_editor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendor.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/main.min.js') }}"></script>
     <script>window.app = new App; app.init();</script>
 </body>
 </html>

@@ -53,11 +53,12 @@ return array(
             // Moving js files -------------------------------
             echo "Updating js in public folder.\n";
 
-            $cd = 'cd '.app_path().'/assets/js;';
-            $from =  app_path(). '/assets/js';
-            $to = app_path().'/../public/assets';
+            $files = '$(find app/assets/js/ -name "*.js" | xargs)';
+            $outputDir = 'public/assets/js/';
+            $outputFile = 'main.min.js';
+            $sourcemapFile = 'main.min.map';
 
-            exec('cp -r '.$from.' '.$to);
+            exec('uglifyjs --source-map '.$outputDir.$sourcemapFile.' --source-map-url '.$sourcemapFile.' --source-map-root /app '.$files.' > '.$outputDir.$outputFile);
         },
 
         'assets/vendor/*' => function($file) {
@@ -65,13 +66,16 @@ return array(
             // Moving vendor files -----------------------------
             echo "Updating vendor in public folder.\n";
 
-            $from =  app_path(). '/assets/vendor/jquery/dist/jquery.min.js';
-            $to = app_path().'/../public/assets/js/vendor/jquery.min.js';
-            exec('cp -r '.$from.' '.$to);
+            $files = [
+                'app/assets/vendor/jquery/dist/jquery.min.js',
+                'app/assets/vendor/screenfull/dist/screenfull.min.js'
+            ];
+            $files = implode(' ', $files);
+            $outputDir = 'public/assets/js/';
+            $outputFile = 'vendor.min.js';
+            $sourcemapFile = 'vendor.min.map';
 
-            $from =  app_path(). '/assets/vendor/screenfull/dist/screenfull.min.js';
-            $to = app_path().'/../public/assets/js/vendor/screenfull.min.js';
-            exec('cp -r '.$from.' '.$to);
+            exec('uglifyjs --source-map '.$outputDir.$sourcemapFile.' --source-map-url '.$sourcemapFile.' --source-map-root /app '.$files.' > '.$outputDir.$outputFile);
         },
     )
 );
