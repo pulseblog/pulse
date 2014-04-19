@@ -16,6 +16,4 @@ script:
   - phpunit -c phpunit.xml.dist
 
 after_script:
-  - php vendor/bin/coveralls
-  # or enable logging
   - php vendor/bin/coveralls -v
