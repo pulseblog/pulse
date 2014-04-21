@@ -7,6 +7,12 @@ _A blogging platform made with Laravel_
 
 ![PulseLogo](https://raw.github.com/Zizaco/pulse/master/app/docs/logo.png)
 
+## Contributting
+
+New contributions are always welcomed. Just open a pull request making sure that it contains tests, doc updates. Checked if the Travis-CI build is alright.
+
+[See all contributors](https://github.com/Zizaco/pulse/graphs/contributors)
+
 ## License
 
 Pulse is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
