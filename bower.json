@@ -3,8 +3,8 @@
   "homepage": "https://github.com/Zizaco/pulse",
   "description": "A blogging platform made with Laravel",
   "dependencies": {
-    "jquery": "latest",
-    "screenfull": "latest"
+    "jquery": "~2.1",
+    "screenfull": "~1.1"
   },
   "authors": [
     "Zizaco",
