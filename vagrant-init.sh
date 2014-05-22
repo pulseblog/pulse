@@ -64,6 +64,22 @@ echo "--- Installing composer packages ---"
 cd /vagrant
 composer install --dev
 
+echo "--- Installing Node.js ---"
+sudo apt-get -y install python-software-properties
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get -y install nodejs
+
+echo "--- Installing Bower ---"
+sudo npm install -g bower
+
+echo "--- Installing LESS ---"
+sudo npm install -g less
+
+echo "--- Installing Mocha ---"
+sudo npm install -g mocha
+sudo npm install sinon
+
 echo "--- Preparing database ---"
 echo "CREATE DATABASE IF NOT EXISTS pulse" | mysql
 php artisan migrate
