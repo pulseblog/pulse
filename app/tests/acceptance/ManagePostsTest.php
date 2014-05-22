@@ -53,6 +53,9 @@ class ManagePostsTest extends AcceptanceTestCase {
             'lean_content' => 'The lean content',
             'content' => 'The whole content',
         ]);
+
+        // And
+        $this->i_should_be_redirected_to('admin/post/1/edit');
     }
 
     /**
@@ -85,6 +88,9 @@ class ManagePostsTest extends AcceptanceTestCase {
             'lean_content' => 'The lean content',
             'content' => 'The whole content',
         ]);
+
+        // And
+        $this->i_should_be_redirected_to('admin/post/1/edit');
     }
 
     /**
@@ -107,6 +113,9 @@ class ManagePostsTest extends AcceptanceTestCase {
 
         // When
         $this->i_click_the_link('a[method="delete"]');
+
+        // And
+        $this->i_should_be_redirected_to('admin/posts');
     }
 
     /**
@@ -196,7 +205,11 @@ class ManagePostsTest extends AcceptanceTestCase {
                         return false;
                     }
                 }
-                return new Pulse\Cms\Post;
+
+                $newPost = new Pulse\Cms\Post;
+                $newPost->id = 1;
+
+                return $newPost;
             });
 
         App::instance('Pulse\Cms\PostRepository', $repo);
@@ -223,7 +236,11 @@ class ManagePostsTest extends AcceptanceTestCase {
                         return false;
                     }
                 }
-                return new Pulse\Cms\Post;
+
+                $newPost = new Pulse\Cms\Post;
+                $newPost->id = 1;
+
+                return $newPost;
             });
 
         App::instance('Pulse\Cms\PostRepository', $repo);
