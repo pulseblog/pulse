@@ -78,7 +78,7 @@ describe('App', function() {
             // Set
             var moduleNames = ['Foo', 'Bar'];
             var $el = {};
-            window = {};
+            if (typeof window === 'undefined') window = {};
 
             // Expectation
             window.Foo = sinon.mock()

@@ -65,7 +65,7 @@ App.prototype.initModule = function ($el, moduleNames) {
 
 	while(i--) {
 		if (typeof window[moduleNames[i]] === 'function') {
-			return new window[moduleNames[i]]($el);
+			new window[moduleNames[i]]($el);
 		} else {
 			throw "constructor or function '"+ moduleNames[i] + "' is not defined.";
 		}
