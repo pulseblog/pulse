@@ -56,6 +56,9 @@ class ManagePostsTest extends AcceptanceTestCase {
 
         // And
         $this->i_should_be_redirected_to('admin/post/1/edit');
+
+        // And
+        $this->session_should_have('success_alert');
     }
 
     /**
@@ -91,6 +94,9 @@ class ManagePostsTest extends AcceptanceTestCase {
 
         // And
         $this->i_should_be_redirected_to('admin/post/1/edit');
+
+        // And
+        $this->session_should_have('success_alert');
     }
 
     /**
@@ -116,6 +122,9 @@ class ManagePostsTest extends AcceptanceTestCase {
 
         // And
         $this->i_should_be_redirected_to('admin/posts');
+
+        // And
+        $this->session_should_have('success_alert');
     }
 
     /**

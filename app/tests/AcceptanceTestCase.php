@@ -85,6 +85,17 @@ abstract class AcceptanceTestCase extends TestCase {
     }
 
     /**
+     * Assert that the session has a given list of values.
+     * @param  string|array  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    protected function session_should_have($key, $value = null)
+    {
+        $this->assertSessionHas($key, $value);
+    }
+
+    /**
      * When calling a method that doesn't exists the test should be marked as
      * incomplete.
      * @param  string $name      Method name
