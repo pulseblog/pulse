@@ -8,6 +8,8 @@
 
     @include ('backend.templates._menu')
 
+    @include ('backend.templates._flash_messages')
+
     <div id="wrapper">
         <div class="l-block-container">
             <div class="l-block-1">
