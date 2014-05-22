@@ -1,6 +1,6 @@
 <?php namespace Pulse\Backend;
 
-use Controller, View, Input, Redirect, Confide, App;
+use Controller, View, Input, Redirect, Confide, App, Session;
 use Pulse\Cms\PostRepository;
 
 /**
@@ -64,6 +64,7 @@ class PostsController extends Controller
         $post = $this->postRepository->createNew($input, $user);
 
         if (count($post->errors()) == 0) {
+            $this->flash('create');
             return Redirect::action(
                         'Pulse\Backend\PostsController@edit',
                         ['id' => $post->id ]
@@ -113,7 +114,8 @@ class PostsController extends Controller
 
         $post = $this->postRepository->update($id, $input);
 
-        if (! $post->errors()) {
+        if (count($post->errors()) == 0) {
+            $this->flash('update');
             return Redirect::action('Pulse\Backend\PostsController@edit', ['id' => $post->id ])
                 ->withInput($input);
         } else {
@@ -133,6 +135,15 @@ class PostsController extends Controller
     {
         $deleted = $this->postRepository->delete($id);
 
+        $this->flash('delete');
+
         return Redirect::action('Pulse\Backend\PostsController@index');
+    }
+
+    protected function flash($action, $success = true, $resource = 'Post')
+    {
+        $append = ($success) ? '_success' : '_failed';
+
+        Session::flash('success_alert', 'dialog.'.$action.$append);
     }
 }
