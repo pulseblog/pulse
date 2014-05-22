@@ -76,6 +76,9 @@ sudo npm install -g bower
 echo "--- Installing LESS ---"
 sudo npm install -g less
 
+echo "--- Installing UglifyJS ---"
+sudo npm install -g uglify-js
+
 echo "--- Installing Mocha ---"
 sudo npm install -g mocha
 sudo npm install sinon
