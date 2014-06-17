@@ -20,6 +20,8 @@ class PagesController extends Controller {
      */
     function __construct(PageRepository $repo)
     {
+        parent::__construct();
+
         $this->pageRepository = $repo;
     }
 

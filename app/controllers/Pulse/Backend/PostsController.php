@@ -20,6 +20,8 @@ class PostsController extends Controller
      */
     function __construct(PostRepository $repo)
     {
+        parent::__construct();
+
         $this->postRepository = $repo;
     }
 
