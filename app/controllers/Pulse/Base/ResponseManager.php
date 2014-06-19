@@ -2,6 +2,7 @@
 
 use App;
 use Request;
+use Redirect;
 use Input;
 
 /**
@@ -32,6 +33,23 @@ class ResponseManager {
             $response = App::make('response')
                 ->view($view, $data);
         }
+
+        return $response;
+    }
+
+    /**
+     * Builds a redirect response to the given path.
+     *
+     * @param  string  $path
+     * @param  int     $status
+     * @param  array   $headers
+     * @param  bool    $secure
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function goToUrl($path, $status = 302, $headers = array(), $secure = null)
+    {
+        $response = App::make('redirect')
+            ->to($path, $status, $headers, $secure);
 
         return $response;
     }

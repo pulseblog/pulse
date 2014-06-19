@@ -52,4 +52,25 @@ class ResponseManagerTest extends TestCase
         $result = $manager->render('name.of.file', $params);
         $this->assertEquals('{"foo":"bar"}', $result);
     }
+
+    public function testShouldGoToUrl()
+    {
+        // Set
+        $manager = App::make('Pulse\Base\ResponseManager');
+        $redirectFacade = m::mock('redirect');
+        $status = 302;
+        $headers = ['foo'=>'bar'];
+
+        // Expectation
+        $redirectFacade->shouldReceive('to')
+            ->once()
+            ->with('path/to/go', $status, $headers, null)
+            ->andReturn('SampleRedirect');
+
+        App::instance('redirect', $redirectFacade);
+
+        // Assertion
+        $result = $manager->goToUrl('path/to/go', $status, $headers);
+        $this->assertEquals('SampleRedirect', $result);
+    }
 }
