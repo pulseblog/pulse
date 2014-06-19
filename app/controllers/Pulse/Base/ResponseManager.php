@@ -27,10 +27,10 @@ class ResponseManager {
     public function render($view, $data = array(), $mergeData = array())
     {
         if (Request::wantsJson() || Input::get('json',false)) {
-            $response = App::make('response')
+            $response = App::make('Response')
                 ->json($data);
         } else {
-            $response = App::make('response')
+            $response = App::make('Response')
                 ->view($view, $data);
         }
 

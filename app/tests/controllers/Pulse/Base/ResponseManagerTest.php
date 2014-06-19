@@ -24,7 +24,7 @@ class ResponseManagerTest extends TestCase
             ->with('name.of.file', $params)
             ->andReturn('<div>RenderedView</div>');
 
-        App::instance('response', $responseFacade);
+        App::instance('Response', $responseFacade);
 
         // Assertion
         $result = $manager->render('name.of.file', $params);
@@ -46,7 +46,7 @@ class ResponseManagerTest extends TestCase
             ->with($params)
             ->andReturn(json_encode($params));
 
-        App::instance('response', $responseFacade);
+        App::instance('Response', $responseFacade);
 
         // Assertion
         $result = $manager->render('name.of.file', $params);
