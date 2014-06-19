@@ -81,7 +81,10 @@ sudo npm install -g uglify-js
 
 echo "--- Installing Mocha ---"
 sudo npm install -g mocha
-sudo npm install sinon
+npm install sinon
+
+echo "--- Installing Bower packages ---"
+bower install -q -s
 
 echo "--- Preparing database ---"
 echo "CREATE DATABASE IF NOT EXISTS pulse" | mysql
