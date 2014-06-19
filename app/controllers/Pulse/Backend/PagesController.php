@@ -37,7 +37,7 @@ class PagesController extends BaseController {
 
         $pages = $this->pageRepository->all($page);
 
-        return View::make('backend.pages.index', compact('pages'));
+        return $this->render('backend.pages.index', compact('pages'));
     }
 
     /**
