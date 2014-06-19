@@ -1,5 +1,8 @@
 <?php namespace Pulse\Base;
 
+use Illuminate\Routing\Controller;
+use App;
+
 /**
  * BaseController Class
  *
@@ -22,7 +25,7 @@ abstract class BaseController extends Controller {
      */
     public function __construct()
     {
-        $responseManager = App::make('Pulse\Base\ResponseManager');
+        $this->responseManager = App::make('Pulse\Base\ResponseManager');
     }
 
     /**
@@ -35,7 +38,7 @@ abstract class BaseController extends Controller {
      */
     protected function render($view, $data = array(), $mergeData = array())
     {
-        return $responseManager->render($view, $data, $mergeData);
+        return $this->responseManager->render($view, $data, $mergeData);
     }
 
     /**
@@ -49,7 +52,7 @@ abstract class BaseController extends Controller {
      */
     protected function goToUrl($path, $status = 302, $headers = array(), $secure = null)
     {
-        return $responseManager->goToUrl($path, $status, $headers, $secure);
+        return $this->responseManager->goToUrl($path, $status, $headers, $secure);
     }
 
     /**
@@ -61,8 +64,8 @@ abstract class BaseController extends Controller {
      * @param  array   $headers
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function goTo($action, $parameters = array(), $status = 302, $headers = array())
+    protected function goToAction($action, $parameters = array(), $status = 302, $headers = array())
     {
-        return $responseManager->goTo($action, $parameters, $status, $headers);
+        return $this->responseManager->goToAction($action, $parameters, $status, $headers);
     }
 }
