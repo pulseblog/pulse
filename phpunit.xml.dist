@@ -26,7 +26,6 @@
         <whitelist>
             <directory suffix=".php">./app/models</directory>
             <directory suffix=".php">./app/controllers</directory>
-            <directory suffix=".php">./app/tests</directory>
             <directory suffix=".php">./app/libraries</directory>
         </whitelist>
     </filter>
