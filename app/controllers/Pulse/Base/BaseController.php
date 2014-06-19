@@ -33,12 +33,12 @@ abstract class BaseController extends Controller {
      *
      * @param  string  $view
      * @param  array   $data
-     * @param  array   $mergeData
+     * @param  array   $viewData Data that will be passed to the View only, so it will not be visible in Json responses
      * @return Illuminate\Support\Contracts\RenderableInterface a renderable View or Response object
      */
-    protected function render($view, $data = array(), $mergeData = array())
+    protected function render($view, $data = array(), $viewData = array())
     {
-        return $this->responseManager->render($view, $data, $mergeData);
+        return $this->responseManager->render($view, $data, $viewData);
     }
 
     /**

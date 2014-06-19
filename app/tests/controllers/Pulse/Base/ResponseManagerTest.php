@@ -34,7 +34,8 @@ class ResponseManagerTest extends TestCase
     public function testShouldRenderJson()
     {
         // Set
-        $manager = App::make('Pulse\Base\ResponseManager');
+        $manager = m::mock('Pulse\Base\ResponseManager[morphToArray]');
+        $manager->shouldAllowMockingProtectedMethods();
         $responseFacade = m::mock();
         $params = ['foo'=>'bar'];
 
@@ -42,8 +43,13 @@ class ResponseManagerTest extends TestCase
         Request::shouldReceive('wantsJson')
             ->andReturn(true);
 
-        $responseFacade->shouldReceive('json')
+        $manager->shouldReceive('morphToArray')
             ->with($params)
+            ->once()
+            ->andReturn(array_merge($params, ['morph'=>true]));
+
+        $responseFacade->shouldReceive('json')
+            ->with(['foo'=>'bar', 'morph'=>true])
             ->andReturn(json_encode($params));
 
         App::instance('Response', $responseFacade);
@@ -94,5 +100,39 @@ class ResponseManagerTest extends TestCase
         // Assertion
         $result = $manager->goToAction('Somewhere@action', $parameters, $status, $headers);
         $this->assertEquals('SampleActionRedirect', $result);
+    }
+
+    public function testShouldMorphToArray()
+    {
+        // Set
+        $manager = App::make('Pulse\Base\ResponseManager');
+        $obj1 = m::mock('Illuminate\Support\Contracts\ArrayableInterface');
+        $obj2 = m::mock('Illuminate\Support\Contracts\ArrayableInterface');
+        $json = [
+            'objects' => [
+                $obj1,
+                $obj2
+            ]
+        ];
+
+        // Expectation
+        $obj1->shouldReceive('toArray')
+            ->once()
+            ->andReturn(['name'=>'obj1']);
+
+        $obj2->shouldReceive('toArray')
+            ->once()
+            ->andReturn(['name'=>'obj2']);
+
+        // Assertion
+        $this->assertEquals(
+            [
+                'objects' => [
+                    ['name'=>'obj1'],
+                    ['name'=>'obj2']
+                ]
+            ],
+            $this->callProtected($manager,'morphToArray', [$json])
+        );
     }
 }

@@ -4,6 +4,8 @@ use App;
 use Request;
 use Redirect;
 use Input;
+use Illuminate\Support\Contracts\JsonableInterface;
+use Illuminate\Support\Contracts\ArrayableInterface;
 
 /**
  * ResponseManager Class
@@ -21,17 +23,17 @@ class ResponseManager {
      *
      * @param  string  $view
      * @param  array   $data
-     * @param  array   $mergeData
+     * @param  array   $viewData Data that will be passed to the View only, so it will not be visible in Json responses
      * @return Illuminate\Support\Contracts\RenderableInterface a renderable View or Response object
      */
-    public function render($view, $data = array(), $mergeData = array())
+    public function render($view, $data = array(), $viewData = array())
     {
         if (Request::wantsJson() || Input::get('json',false)) {
             $response = App::make('Response')
-                ->json($data);
+                ->json($this->morphToArray($data));
         } else {
             $response = App::make('Response')
-                ->view($view, $data);
+                ->view($view, array_merge($data, $viewData));
         }
 
         return $response;
@@ -69,5 +71,25 @@ class ResponseManager {
             ->action($action, $parameters, $status, $headers);
 
         return $response;
+    }
+
+    /**
+     * Morph the given content into Array.
+     *
+     * @param  mixed   $content
+     * @return string
+     */
+    protected function morphToArray($content)
+    {
+        if ($content instanceof ArrayableInterface || method_exists($content, 'toArray'))
+            return $content->toArray();
+
+        if (is_array($content)) {
+            foreach($content as $key => $value) {
+                $content[$key] = $this->morphToArray($value);
+            }
+        }
+
+        return $content;
     }
 }
