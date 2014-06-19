@@ -53,4 +53,21 @@ class ResponseManager {
 
         return $response;
     }
+
+    /**
+     * Builds a redirect response to a controller action.
+     *
+     * @param  string  $action
+     * @param  array   $parameters
+     * @param  int     $status
+     * @param  array   $headers
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function goToAction($action, $parameters = array(), $status = 302, $headers = array())
+    {
+        $response = App::make('redirect')
+            ->action($action, $parameters, $status, $headers);
+
+        return $response;
+    }
 }
