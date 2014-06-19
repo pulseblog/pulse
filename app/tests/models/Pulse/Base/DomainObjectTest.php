@@ -26,6 +26,19 @@ class DomainObjectTest extends TestCase
         // Assertion
         $this->assertEquals($messageBag, $obj->errors());
     }
+
+    public function testShouldImplementJsonSerializable()
+    {
+        // Set
+        $obj = new _stubDomainObject;
+        $obj->name = 'Test Object';
+
+        // Assertion
+        $this->assertEquals(
+            ['name'=>'Test Object'],
+            $obj->jsonSerialize()
+        );
+    }
 }
 
 class _stubDomainObject extends DomainObject {}
