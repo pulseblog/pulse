@@ -16,7 +16,7 @@ class ResponseManagerTest extends TestCase
     {
         // Set
         $manager = App::make('Pulse\Base\ResponseManager');
-        $responseFacade = m::mock('response');
+        $responseFacade = m::mock();
         $params = ['foo'=>'bar'];
 
         // Expectation
@@ -35,7 +35,7 @@ class ResponseManagerTest extends TestCase
     {
         // Set
         $manager = App::make('Pulse\Base\ResponseManager');
-        $responseFacade = m::mock('response');
+        $responseFacade = m::mock();
         $params = ['foo'=>'bar'];
 
         // Expectation
@@ -57,7 +57,7 @@ class ResponseManagerTest extends TestCase
     {
         // Set
         $manager = App::make('Pulse\Base\ResponseManager');
-        $redirectFacade = m::mock('redirect');
+        $redirectFacade = m::mock();
         $status = 302;
         $headers = ['foo'=>'bar'];
 
@@ -78,7 +78,7 @@ class ResponseManagerTest extends TestCase
     {
         // Set
         $manager = App::make('Pulse\Base\ResponseManager');
-        $redirectFacade = m::mock('redirect');
+        $redirectFacade = m::mock();
         $parameters = ['something'=>'else'];
         $status = 302;
         $headers = ['foo'=>'bar'];
