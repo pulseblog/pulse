@@ -1,5 +1,6 @@
 <?php namespace Pulse\Base;
 
+use JsonSerializable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package  Pulse\Base
  */
-abstract class DomainObject extends Model
+abstract class DomainObject extends Model implements JsonSerializable
 {
     /**
      * Error message bag
@@ -28,5 +29,15 @@ abstract class DomainObject extends Model
         if(! $this->errors) $this->errors = new \Illuminate\Support\MessageBag;
 
         return $this->errors;
+    }
+
+    /**
+     * Convert the model instance to JSON.
+     *
+     * @return string
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
