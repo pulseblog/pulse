@@ -1,6 +1,7 @@
 <?php namespace Pulse\Backend;
 
-use Controller, View, Input, Redirect, Confide, App, Session;
+use Pulse\Base\BaseController;
+use View, Input, Redirect, Confide, App, Session;
 use Pulse\Cms\PostRepository;
 
 /**
@@ -10,7 +11,7 @@ use Pulse\Cms\PostRepository;
  *
  * @package Pulse\Backend
  */
-class PostsController extends Controller
+class PostsController extends BaseController
 {
     protected $postRepository;
 
