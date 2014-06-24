@@ -48,7 +48,7 @@ class PagesController extends BaseController {
     public function create()
     {
         $page = App::make('Pulse\Cms\Page');
-        return View::make('backend.pages.create', compact('page'));
+        return $this->render('backend.pages.create', compact('page'));
     }
 
     /**
@@ -62,17 +62,17 @@ class PagesController extends BaseController {
         $input = Input::all();
 
         if (! $user)
-            return Redirect::action('Pulse\Backend\PagesController@index');
+            return $this->goToAction('Pulse\Backend\PagesController@index');
 
         $page = $this->pageRepository->createNew($input, $user);
 
         if (count($page->errors()) == 0) {
-            return Redirect::action(
+            return $this->goToAction(
                         'Pulse\Backend\PagesController@edit',
                         ['id' => $page->id ]
                    );
         } else {
-            return Redirect::action('Pulse\Backend\PagesController@create')
+            return $this->goToAction('Pulse\Backend\PagesController@create')
                 ->withInput($input)
                 ->withErrors($page->errors());
         }
@@ -88,7 +88,7 @@ class PagesController extends BaseController {
     {
         $page = $this->pageRepository->findOrFail($id);
 
-        return View::make('backend.pages.show');
+        return $this->render('backend.pages.show');
     }
 
     /**
@@ -101,7 +101,7 @@ class PagesController extends BaseController {
     {
         $page = $this->pageRepository->findOrFail($id);
 
-        return View::make('backend.pages.edit', ['page' => $page]);
+        return $this->render('backend.pages.edit', ['page' => $page]);
     }
 
     /**
@@ -117,10 +117,10 @@ class PagesController extends BaseController {
         $page = $this->pageRepository->update($id, $input);
 
         if (! $page->errors()) {
-            return Redirect::action('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
+            return $this->goToAction('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
                 ->withInput($input);
         } else {
-            return Redirect::action('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
+            return $this->goToAction('Pulse\Backend\PagesController@edit', ['id' => $page->id ])
                 ->withInput($input)
                 ->withErrors($page->errors());
         }
@@ -136,7 +136,7 @@ class PagesController extends BaseController {
     {
         $deleted = $this->pageRepository->delete($id);
 
-        return Redirect::action('Pulse\Backend\PagesController@index');
+        return $this->goToAction('Pulse\Backend\PagesController@index');
     }
 
 }

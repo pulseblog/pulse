@@ -37,7 +37,7 @@ class PostsController extends BaseController
 
         $posts = $this->postRepository->all($page);
 
-        return View::make('backend.posts.index', compact('posts'));
+        return $this->render('backend.posts.index', compact('posts'));
     }
 
     /**
@@ -48,7 +48,7 @@ class PostsController extends BaseController
     public function create()
     {
         $post = App::make('Pulse\Cms\Post');
-        return View::make('backend.posts.create', compact('post'));
+        return $this->render('backend.posts.create', compact('post'));
     }
 
     /**
@@ -62,18 +62,18 @@ class PostsController extends BaseController
         $input = Input::all();
 
         if (! $user)
-            return Redirect::action('Pulse\Backend\PostsController@index');
+            return $this->goToAction('Pulse\Backend\PostsController@index');
 
         $post = $this->postRepository->createNew($input, $user);
 
         if (count($post->errors()) == 0) {
             $this->flash('create');
-            return Redirect::action(
+            return $this->goToAction(
                         'Pulse\Backend\PostsController@edit',
                         ['id' => $post->id ]
                    );
         } else {
-            return Redirect::action('Pulse\Backend\PostsController@create')
+            return $this->goToAction('Pulse\Backend\PostsController@create')
                 ->withInput($input)
                 ->withErrors($post->errors());
         }
@@ -89,7 +89,7 @@ class PostsController extends BaseController
     {
         $post = $this->postRepository->findOrFail($id);
 
-        return View::make('backend.posts.show');
+        return $this->render('backend.posts.show');
     }
 
     /**
@@ -102,7 +102,7 @@ class PostsController extends BaseController
     {
         $post = $this->postRepository->findOrFail($id);
 
-        return View::make('backend.posts.edit', ['post' => $post]);
+        return $this->render('backend.posts.edit', ['post' => $post]);
     }
 
     /**
@@ -119,10 +119,10 @@ class PostsController extends BaseController
 
         if (count($post->errors()) == 0) {
             $this->flash('update');
-            return Redirect::action('Pulse\Backend\PostsController@edit', ['id' => $post->id ])
+            return $this->goToAction('Pulse\Backend\PostsController@edit', ['id' => $post->id ])
                 ->withInput($input);
         } else {
-            return Redirect::action('Pulse\Backend\PostsController@edit', ['id' => $post->id ])
+            return $this->goToAction('Pulse\Backend\PostsController@edit', ['id' => $post->id ])
                 ->withInput($input)
                 ->withErrors($post->errors());
         }
@@ -140,7 +140,7 @@ class PostsController extends BaseController
 
         $this->flash('delete');
 
-        return Redirect::action('Pulse\Backend\PostsController@index');
+        return $this->goToAction('Pulse\Backend\PostsController@index');
     }
 
     protected function flash($action, $success = true, $resource = 'Post')
