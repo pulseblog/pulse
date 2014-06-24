@@ -1,7 +1,7 @@
 <?php namespace Pulse\Frontend;
 
 use App, Input, View;
-use Controller;
+use Pulse\Base\BaseController;
 
 /**
  * CmsController Class
@@ -10,7 +10,7 @@ use Controller;
  *
  * @package  Pulse\Frontend
  */
-class CmsController extends Controller
+class CmsController extends BaseController
 {
     /**
      * Displays the blog post index for the given page
@@ -30,7 +30,7 @@ class CmsController extends Controller
         $posts = $repo->all($page);
         $pages = $pageRepo->all();
 
-        return View::make('front.posts.index', compact('posts', 'pages'));
+        return $this->render('front.posts.index', compact('posts', 'pages'));
     }
 
     /**
@@ -48,7 +48,7 @@ class CmsController extends Controller
             $postPresenter = App::make('Pulse\Cms\Presenter');
             $postPresenter->setInstance($post);
 
-            return View::make('front.posts.show', compact('postPresenter'));
+            return $this->render('front.posts.show', compact('postPresenter'));
         } else {
             App::abort(404);
         }
@@ -69,7 +69,7 @@ class CmsController extends Controller
             $pagePresenter = App::make('Pulse\Cms\Presenter');
             $pagePresenter->setInstance($page);
 
-            return View::make('front.pages.show', compact('pagePresenter'));
+            return $this->render('front.pages.show', compact('pagePresenter'));
         } else {
             App::abort(404);
         }
