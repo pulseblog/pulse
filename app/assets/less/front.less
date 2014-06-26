@@ -21,6 +21,7 @@
  * and body backgrounds.
  */
 @import "common/reset";
+@import "front/base/default";
 
 /**
  * Import layout rules
@@ -31,8 +32,11 @@
 @import "common/layout/general";
 @import "common/layout/grid";
 
-@import "front/layout/general";
-
-@import "front/module/sidebar";
-@import "front/module/no-posts";
-@import "front/module/posts";
+/**
+ * Import modules
+ *
+ * Modules sit inside Layout components and can
+ * sometimes sit within other Modules, too. Each
+ * Module should be designed to exist as a
+ * standalone component.
+ */

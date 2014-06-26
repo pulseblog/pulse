@@ -52,7 +52,7 @@ App::error(function(Exception $exception, $code)
 
     if(App::environment() == 'production')
     {
-        return Redirect::to('/');
+        // return Redirect::to('/');
     }
 });
 

@@ -11,11 +11,10 @@
     </head>
 
     <body>
-        <div id="l-sidebar" class="m-sidebar">
-            @include('front.components._sidebar')
+        <div class="l-block-container">
+            @include('front.templates._menu')
         </div>
-
-        <div id="l-content" class="m-content">
+        <div class="l-block-container">
             @yield('content')
         </div>
     </body>

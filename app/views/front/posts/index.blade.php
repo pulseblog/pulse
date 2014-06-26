@@ -1,20 +1,21 @@
-@extends('layouts.front')
+@extends('front.templates.main')
 
 @section('content')
     @foreach ($posts as $post)
-        <div class="m-post-container">
-            <a class="m-post-title" href="{{ URL::action('Pulse\Frontend\CmsController@showPost', ['slug'=>$post->slug]); }}">
-                {{ $post->title }}
-            </a>
-            <div class="published-at">{{ date('M D,Y', strtotime($post->created_at)) }}</div>
+        <div class="l-block-1">
+            {{ link_to_action('Pulse\Frontend\CmsController@showPost', $post->title, ['slug'=>$post->slug], ['class'=>'title']) }}
+
+            <div class="published-at">
+                {{ date('M D, Y', strtotime($post->created_at)) }}
+            </div>
 
             <img src="http://lorempixel.com/837/350/nature" alt="" class="m-post-image">
 
             <div class="m-post-short-content">
-                {{ $post->lean_content }}
+                {{{ $post->lean_content }}}
             </div>
 
-            <a href="#" class="m-post-read-more">Read more</a>
+            {{ link_to_action('Pulse\Frontend\CmsController@showPost', 'Read more', ['slug'=>$post->slug], ['class'=>'title']) }}
         </div>
     @endforeach
 

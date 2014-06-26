@@ -1,5 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
-@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
 /**
  * This project uses smacss in order to keep
  * the stylesheets organized.
@@ -152,6 +152,134 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+/**
+ * default.less
+ *
+ * Base styles include setting heading sizes,
+ * default link styles, default font styles,
+ * and body backgrounds.
+ */
+/*******************************************
+* Variables
+********************************************/
+/*******************************************
+* Base definitions
+********************************************/
+body,
+html {
+  color: #3b3b3b;
+  font-size: 16px;
+  font-family: 'PT Sans', 'Arial', sans-serif;
+  height: 100%;
+  line-height: 1.45em;
+  background-color: #ffffff;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  color: #000000;
+  font-size: 38px;
+  padding: 28px 0px;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  -webkit-opacity: 0.5;
+  opacity: 0.5;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  filter: alpha(opacity=50);
+  display: block;
+  font-family: 'Ubuntu', 'Arial', sans-serif;
+  line-height: 1em;
+}
+h2,
+.h2 {
+  font-size: 30px;
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  -webkit-opacity: 0.7;
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+  filter: alpha(opacity=70);
+}
+h3,
+.h3 {
+  font-size: 26px;
+  -moz-opacity: 0.4;
+  -khtml-opacity: 0.4;
+  -webkit-opacity: 0.4;
+  opacity: 0.4;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+  filter: alpha(opacity=40);
+}
+h4,
+.h4 {
+  font-size: 20px;
+}
+small {
+  opacity: 0.7;
+  font-size: 0.8em;
+}
+p {
+  text-align: justify;
+}
+a {
+  color: #3b8eb9;
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover {
+  -moz-opacity: 0.7;
+  -khtml-opacity: 0.7;
+  -webkit-opacity: 0.7;
+  opacity: 0.7;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+  filter: alpha(opacity=70);
+}
+b {
+  font-weight: bold;
+}
+i {
+  font-style: italic;
+}
+em {
+  color: #8ac932;
+}
+hr {
+  border: solid 2px #dddddd;
+}
+pre,
+code {
+  font-family: monospace;
+  font-size: 14px;
+  background-color: #000000;
+  color: #ffffff;
+  opacity: 0.8;
+  padding: 5px;
+  margin: 5px 0;
+}
+pre.is-inline,
+code.is-inline {
+  display: inline;
+}
+blockquote {
+  display: block;
+  background-color: #dddddd;
+  font-style: italic;
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+blockquote small {
+  display: block;
+  margin-top: 5px;
+}
+blockquote small:before {
+  content: '\2014 \00A0';
 }
 /**
  * Import layout rules
@@ -329,94 +457,11 @@ l-horizontal {
     padding: 10px 30px;
   }
 }
-body,
-html {
-  height: 100%;
-  font-family: 'Ubuntu', Arial, sans-serif;
-}
-#l-sidebar {
-  height: 100%;
-  width: 25%;
-  margin: 0;
-  display: inline-block;
-  position: fixed;
-}
-#l-content {
-  width: 66.3%;
-  padding: 20px;
-  margin: 0;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-}
-.m-sidebar {
-  padding: 20px;
-  border-right: 1px solid #eeeeee;
-}
-.m-sidebar .logo img {
-  width: 100%;
-}
-.m-sidebar .pages {
-  text-align: center;
-}
-.m-sidebar .page-item {
-  padding: 10px 0px;
-  color: #858585;
-}
-.m-sidebar .page-item:hover {
-  padding: 10px 0px;
-  color: #000000;
-}
-.m-no-post-found {
-  position: relative;
-  text-align: center;
-  font-size: 50px;
-  min-height: 100%;
-}
-.m-post-container {
-  border-bottom: 1px solid #eeeeee;
-  margin-bottom: 20px;
-  padding: 20px 10px 20px 0;
-}
-.m-post-title {
-  font-family: 'Lato';
-  font-size: 32px;
-  text-decoration: none;
-  display: block;
-  color: #163757;
-  margin-bottom: 10px;
-}
-.m-post-title:hover {
-  color: #3b8eb9;
-}
-.m-post-read-more {
-  padding: 15px 10px;
-  border: 1px solid #eeeeee;
-  text-decoration: none;
-  display: inline-block;
-  color: #000000;
-  -webkit-border-top-right-radius: 2px;
-  -webkit-border-bottom-right-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-top-left-radius: 0;
-  -moz-border-radius-topright: 2px;
-  -moz-border-radius-bottomright: 0;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-topleft: 0;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  -moz-background-clip: padding-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-}
-.m-post-short-content {
-  padding: 0 0 20px 0;
-}
-.published-at {
-  font-weight: bold;
-}
-.m-post-image {
-  margin: 20px 0;
-}
+/**
+ * Import modules
+ *
+ * Modules sit inside Layout components and can
+ * sometimes sit within other Modules, too. Each
+ * Module should be designed to exist as a
+ * standalone component.
+ */

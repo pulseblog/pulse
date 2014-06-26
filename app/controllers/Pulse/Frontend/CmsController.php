@@ -20,6 +20,7 @@ class CmsController extends BaseController
     {
         /**
          * The page
+         *
          * @var integer
          */
         $page = Input::get('page', 0);
@@ -35,6 +36,7 @@ class CmsController extends BaseController
 
     /**
      * Show a post by slug
+     *
      * @param  string $slug The post slug
      * @return Illuminate\Http\Response
      */
@@ -56,6 +58,7 @@ class CmsController extends BaseController
 
     /**
      * Show a page by slug
+     *
      * @param  string $slug The page slug
      * @return Illuminate\Http\Response
      */
