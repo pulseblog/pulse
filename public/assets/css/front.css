@@ -495,6 +495,28 @@ l-horizontal {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+@font-face {
+  font-family: 'Mono Social Icons Font';
+  src: url('/assets/fonts/MonoSocialIconsFont-1.10.eot');
+  src: url('/assets/fonts/MonoSocialIconsFont-1.10.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/MonoSocialIconsFont-1.10.woff') format('woff'), url('/assets/fonts/MonoSocialIconsFont-1.10.ttf') format('truetype'), url('/assets/fonts/MonoSocialIconsFont-1.10.svg#MonoSocialIconsFont') format('svg');
+  src: url('/assets/fonts/MonoSocialIconsFont-1.10.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.social-icon {
+  font-family: 'Mono Social Icons Font';
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  -ms-text-rendering: optimizeLegibility;
+  -o-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  font-size: 2.5em;
+}
 .titlebar {
   background-color: #000000;
   background-image: url("/assets/img/header.jpg");
@@ -531,5 +553,16 @@ l-horizontal {
 @media only screen and (min-width: 720px) and (max-width: 1079px), only screen and (max-width: 719px) {
   .titlebar .logo {
     margin: 60px 0px 40px;
+  }
+}
+.titlebar a {
+  color: #ffffff;
+}
+.social-links {
+  text-align: center;
+}
+@media only screen and (min-width: 1600px) {
+  .social-links {
+    font-size: 1.4em;
   }
 }

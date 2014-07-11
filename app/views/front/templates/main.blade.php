@@ -19,5 +19,8 @@
         <div class="l-block-container">
             @yield('content')
         </div>
+        <footer class="l-block-container">
+            @include('front.templates._footer')
+        </footer>
     </body>
 </html>
