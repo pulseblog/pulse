@@ -9,5 +9,6 @@ return array(
     |
     */
 
-    'blogname' => "Pulse Blog",
+    'blogname'     => "Pulse Blog",
+    'discuss_name' => null,
 );

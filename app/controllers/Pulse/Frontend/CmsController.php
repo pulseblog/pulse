@@ -46,7 +46,7 @@ class CmsController extends BaseController
             $postPresenter = App::make('Pulse\Cms\Presenter');
             $postPresenter->setInstance($post);
 
-            return $this->render('front.posts.show', compact('postPresenter'));
+            return $this->render('front.posts.show', compact('postPresenter', 'post'));
         } else {
             App::abort(404);
         }
