@@ -61,7 +61,6 @@ class SeePostListTest extends AcceptanceTestCase {
             ->andReturn($posts);
 
         $pageRepo->shouldReceive('all')
-            ->once()
             ->andReturn([]);
 
         App::instance('Pulse\Cms\PostRepository', $repo);

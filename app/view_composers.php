@@ -24,4 +24,3 @@ if (app()->environment() != 'testing') {
     });
 
 }
-

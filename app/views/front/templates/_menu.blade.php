@@ -8,8 +8,10 @@
 
     <ul class="menu">
         {{ link_to_action('Pulse\Frontend\CmsController@indexPosts', 'Blog', [], ['class'=>'link']) }}
-        @foreach($pages as $page)
-            {{ link_to_action('Pulse\Frontend\CmsController@showPage', $page->title, ['slug'=>$page->slug], ['class'=>'link']) }}
-        @endforeach
+        @if (isset($pages))
+            @foreach ($pages as $page)
+                {{ link_to_action('Pulse\Frontend\CmsController@showPage', $page->title, ['slug'=>$page->slug], ['class'=>'link']) }}
+            @endforeach
+        @endif
     </ul>
 </div>
