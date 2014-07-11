@@ -315,7 +315,7 @@ select {
 label {
   display: block;
 }
-@media only screen and (min-width: 1080px), only screen and (min-width: 720px) and (max-width: 1079px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px), only screen and (min-width: 720px) and (max-width: 1079px) {
   fieldset label {
     float: left;
     width: 160px;
@@ -371,7 +371,7 @@ l-horizontal {
   min-height: 50%;
   margin: 20px 0 40px 0;
 }
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px) {
   #wrapper {
     margin: 20px 0 80px 0;
   }
@@ -688,7 +688,7 @@ button.is-loading,
   -o-transition: all 0 ease-out;
   transition: all 0 ease-out;
 }
-@media only screen and (min-width: 1080px), only screen and (min-width: 720px) and (max-width: 1079px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px), only screen and (min-width: 720px) and (max-width: 1079px) {
   .menubar {
     /**
          * The common menu. Ideally applied to a
@@ -786,7 +786,7 @@ button.is-loading,
      * will toggle the mobile menu.
      */
 }
-@media only screen and (min-width: 1080px), only screen and (min-width: 720px) and (max-width: 1079px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px), only screen and (min-width: 720px) and (max-width: 1079px) {
   .menu-activator {
     display: none;
   }
@@ -1115,7 +1115,7 @@ table tr:hover {
 /*******************************************
 * Big
 ********************************************/
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px) {
   .big {
     font-size: 1.5em;
   }
@@ -1290,7 +1290,7 @@ table tr:hover {
     background-size: 400px;
   }
 }
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1080px) and (max-width: 1599px) {
   .icon.is-white {
     background-image: url("/assets/img/template/iconset_white_small.png");
   }

@@ -26,8 +26,9 @@
 @img: "/assets/img";
 
 // Fonts
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
-@import url(http://fonts.googleapis.com/css?family=PT+Sans);
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic|Montserrat:400,700);
+@fontCommon: 'Libre Baskerville', serif;
+@fontHero: 'Montserrat', 'Arial', sans-serif;
 
 /*******************************************
 * Base definitions
@@ -36,7 +37,7 @@
 body, html {
     color: @colorGray;
     font-size: 16px;
-    font-family: 'PT Sans', 'Arial', sans-serif;
+    font-family: @fontCommon;
     height: 100%;
     line-height: 1.45em;
     background-color: @colorBackground;
@@ -48,7 +49,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     padding: 28px 0px;
     .opacity(0.5);
     display: block;
-    font-family: 'Ubuntu', 'Arial', sans-serif;
+    font-family: @fontHero;
     line-height: 1em;
 }
 

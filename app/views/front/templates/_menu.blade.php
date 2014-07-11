@@ -1,9 +1,9 @@
 <div class="l-block-1">
 
     @if (Route::currentRouteAction() == 'Front\HomeController@indexPosts')
-        <h1 class='logo'>{{ Config::get('pulse.blogname','Unamed') }}</h1>
+        <h1 class='logo'>{{ Config::get('pulse.blogname', 'Unamed') }}</h1>
     @else
-        <div class='logo h1'>{{ Config::get('pulse.blogname','Unamed') }}</div>
+        <div class='logo h1'>{{ Config::get('pulse.blogname', 'Unamed') }}</div>
     @endif
 
     <ul class="menu">

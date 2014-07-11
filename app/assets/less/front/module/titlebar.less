@@ -1,0 +1,30 @@
+.titlebar {
+    background-color: @colorBlack;
+    background-image: url("@{img}/header.jpg");
+    background-position: center;
+    background-size: 100%;
+    background-size: cover;
+
+    h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+        color: @colorWhite;
+    }
+
+    .logo {
+        text-align: center;
+        margin: 120px 0px 100px;
+        text-transform:uppercase;
+
+        @media @desktop {
+            font-size: 3em;
+        }
+
+        @media @big-screen {
+            font-size: 7em;
+            margin: 220px 0px 200px;
+        }
+
+        @media @tablet, @phone {
+            margin: 60px 0px 40px;
+        }
+    }
+}

@@ -11,9 +11,11 @@
     </head>
 
     <body>
-        <div class="l-block-container">
-            @include('front.templates._menu')
-        </div>
+        <header class="titlebar">
+            <div class="l-block-container">
+                @include('front.templates._menu')
+            </div>
+        </header>
         <div class="l-block-container">
             @yield('content')
         </div>
