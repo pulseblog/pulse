@@ -465,3 +465,18 @@ l-horizontal {
  * Module should be designed to exist as a
  * standalone component.
  */
+.postcard {
+  background-color: #ffffff;
+  text-align: center;
+}
+.postcard .title {
+  text-align: center;
+}
+.postcard .read-more {
+  color: #ffffff;
+  background-color: #3b8eb9;
+  padding: 2px 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
