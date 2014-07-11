@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Pulse Blogging Platform</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
 </head>
 <body>

@@ -1,5 +1,7 @@
 @extends('front.templates.main')
 
 @section('content')
-    {{ $pagePresenter->display() }}
+    <div class="l-block-1">
+        {{ $pagePresenter->display() }}
+    </div>
 @stop
