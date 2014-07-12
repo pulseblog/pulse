@@ -13,6 +13,8 @@ class UserAuthenticationTest extends AcceptanceTestCase {
      */
     public function testShouldLogin()
     {
+        $this->markTestIncomplete();
+
         // Given
         $this->site_has_user([
             'username' => 'Someone',
