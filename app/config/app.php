@@ -106,9 +106,10 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Zizaco\Confide\ConfideServiceProvider',
 		'LeroyMerlin\AssetWatcher\AssetWatcherServiceProvider',
 		'LeroyMerlin\LaraSniffer\ServiceProvider',
+		'Zizaco\Confide\ServiceProvider',
+
 	),
 
 	/*
@@ -174,7 +175,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Confide'         => 'Zizaco\Confide\ConfideFacade',
+		'Confide'         => 'Zizaco\Confide\Facade',
 
 	),
 
