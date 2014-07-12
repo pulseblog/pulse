@@ -10,6 +10,7 @@ abstract class AcceptanceTestCase extends TestCase {
      */
     public function tearDown()
     {
+        parent::tearDown();
         m::close();
     }
 
