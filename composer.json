@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "~4.1",
 		"dflydev/markdown": "1.0.*@dev",
-		"zizaco/confide": "dev-huge-update",
+		"zizaco/confide": "~4.0",
 		"leroy-merlin-br/assetwatcher": "dev-master",
 		"leroy-merlin-br/larasniffer": "dev-master"
 	},

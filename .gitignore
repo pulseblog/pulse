@@ -2,7 +2,6 @@
 /vendor
 composer.phar
 composer.lock
-.DS_Store
 Thumbs.db
 /app/assets/vendor
 /node_modules

@@ -33,3 +33,15 @@ Route::get('admin/posts/create',    'Pulse\Backend\PostsController@create');
 Route::delete('admin/post/{id}',    'Pulse\Backend\PostsController@destroy');
 Route::put('admin/post/{id}',       'Pulse\Backend\PostsController@update');
 Route::post('admin/post',           'Pulse\Backend\PostsController@store');
+
+// Confide routes
+Route::get( 'users/create',                 'Pulse\Backend\UsersController@create');
+Route::post('users',                        'Pulse\Backend\UsersController@store');
+Route::get( 'users/login',                  'Pulse\Backend\UsersController@login');
+Route::post('users/login',                  'Pulse\Backend\UsersController@do_login');
+Route::get( 'users/confirm/{code}',         'Pulse\Backend\UsersController@confirm');
+Route::get( 'users/forgot_password',        'Pulse\Backend\UsersController@forgot_password');
+Route::post('users/forgot_password',        'Pulse\Backend\UsersController@do_forgot_password');
+Route::get( 'users/reset_password/{token}', 'Pulse\Backend\UsersController@reset_password');
+Route::post('users/reset_password',         'Pulse\Backend\UsersController@do_reset_password');
+Route::get( 'users/logout',                 'Pulse\Backend\UsersController@logout');
