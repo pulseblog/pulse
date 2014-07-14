@@ -27,7 +27,7 @@ class UserAuthenticationTest extends AcceptanceTestCase {
         ]);
 
         // When
-        $this->i_visit_url('user/login');
+        $this->i_visit_url('users/login');
 
         // And
         $this->i_submit_form_with('form', [

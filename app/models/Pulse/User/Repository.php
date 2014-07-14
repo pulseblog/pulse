@@ -1,14 +1,12 @@
 <?php namespace Pulse\User;
 
-use Confide, Config, App;
+use App, Config, Confide;
 
 /**
- * Class Pulse\User\Repository
+ * Class Repository
  *
- * This service abstracts some interactions that occurs within Confide and
+ * This service abstracts some interactions that occurs between Confide and
  * the Database.
- *
- * @package  Pulse\User
  */
 class Repository
 {
@@ -29,6 +27,9 @@ class Repository
         // before saving. This field will be used in Ardent's
         // auto validation.
         $user->password_confirmation = array_get($input, 'password_confirmation' );
+
+        // Generate a random confirmation code
+        $user->confirmation_code     = md5($user->username.time('U'));
 
         // Save if valid. Password field will be hashed before save
         $this->save($user);
@@ -71,9 +72,29 @@ class Repository
      */
     public function existsButNotConfirmed($input)
     {
-        $user = App::make('Pulse\User\User');
+        $user = Confide::getUserByEmailOrUsername($input);
 
-        return $user->checkUserExists($input) and !$user->isConfirmed($input);
+        if ($user)
+            return ! $user->confirmed;
+    }
+
+    /**
+     * Resets a password of a user. The $input['token'] will tell which user.
+     * @param  array  $input Array containing 'token', 'password' and 'password_confirmation' keys.
+     * @return boolean Success
+     */
+    public function resetPassword($input)
+    {
+        $result = false;
+        $user   = Confide::userByResetPasswordToken($input['token']);
+
+        if ($user) {
+            $user->password              = $input['password'];
+            $user->password_confirmation = $input['password_confirmation'];
+            $result = $this->save($user);
+        }
+
+        return $result;
     }
 
     /**

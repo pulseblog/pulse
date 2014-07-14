@@ -1,17 +1,14 @@
 <?php namespace Pulse\Backend;
 
-use App, View, Input, Config, Redirect, Lang, Confide;
+use App, View, Input, Config, Redirect, Lang, Mail, Confide;
 use Controller;
-use Pulse\User\User;
 
 /**
- * UserController Class
+ * UsersController Class
  *
- * Implements actions regarding user management (Backend)
- *
- * @package Pulse\Backend
+ * Implements actions regarding user management
  */
-class UserController extends Controller {
+class UsersController extends Controller {
 
     /**
      * Displays the form for account creation
@@ -33,14 +30,20 @@ class UserController extends Controller {
 
         if ($user->id)
         {
-            return Redirect::action('Pulse\Backend\UserController@login')
+            Mail::send(Config::get('confide::email_account_confirmation'), compact('user'), function($message) use ($user) {
+                $message
+                    ->to($user->email, $user->username)
+                    ->subject(Lang::get('confide::confide.email.account_confirmation.subject'));
+            });
+
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->with( 'notice', Lang::get('confide::confide.alerts.account_created') );
         }
         else
         {
             $error = $user->errors()->all(':message');
 
-            return Redirect::action('Pulse\Backend\UserController@create')
+            return Redirect::action('Pulse\Backend\UsersController@create')
                 ->withInput(Input::except('password'))
                 ->with( 'error', $error );
         }
@@ -90,7 +93,7 @@ class UserController extends Controller {
                 $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
             }
 
-            return Redirect::action('Pulse\Backend\UserController@login')
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->withInput(Input::except('password'))
                 ->with( 'error', $err_msg );
         }
@@ -106,13 +109,13 @@ class UserController extends Controller {
         if ( Confide::confirm( $code ) )
         {
             $notice_msg = Lang::get('confide::confide.alerts.confirmation');
-            return Redirect::action('Pulse\Backend\UserController@login')
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->with( 'notice', $notice_msg );
         }
         else
         {
             $error_msg = Lang::get('confide::confide.alerts.wrong_confirmation');
-            return Redirect::action('Pulse\Backend\UserController@login')
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->with( 'error', $error_msg );
         }
     }
@@ -135,13 +138,13 @@ class UserController extends Controller {
         if( Confide::forgotPassword( Input::get( 'email' ) ) )
         {
             $notice_msg = Lang::get('confide::confide.alerts.password_forgot');
-            return Redirect::action('Pulse\Backend\UserController@login')
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->with( 'notice', $notice_msg );
         }
         else
         {
             $error_msg = Lang::get('confide::confide.alerts.wrong_password_forgot');
-            return Redirect::action('Pulse\Backend\UserController@forgot_password')
+            return Redirect::action('Pulse\Backend\UsersController@forgot_password')
                 ->withInput()
                 ->with( 'error', $error_msg );
         }
@@ -163,23 +166,24 @@ class UserController extends Controller {
      */
     public function do_reset_password()
     {
+        $repo = App::make('Pulse\User\Repository');
         $input = array(
-            'token'=>Input::get( 'token' ),
-            'password'=>Input::get( 'password' ),
-            'password_confirmation'=>Input::get( 'password_confirmation' ),
+            'token'                 =>Input::get( 'token' ),
+            'password'              =>Input::get( 'password' ),
+            'password_confirmation' =>Input::get( 'password_confirmation' ),
         );
 
         // By passing an array with the token, password and confirmation
-        if( Confide::resetPassword( $input ) )
+        if( $repo->resetPassword( $input ) )
         {
             $notice_msg = Lang::get('confide::confide.alerts.password_reset');
-            return Redirect::action('Pulse\Backend\UserController@login')
+            return Redirect::action('Pulse\Backend\UsersController@login')
                 ->with( 'notice', $notice_msg );
         }
         else
         {
             $error_msg = Lang::get('confide::confide.alerts.wrong_password_reset');
-            return Redirect::action('Pulse\Backend\UserController@reset_password', array('token'=>$input['token']))
+            return Redirect::action('Pulse\Backend\UsersController@reset_password', array('token'=>$input['token']))
                 ->withInput()
                 ->with( 'error', $error_msg );
         }

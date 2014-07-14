@@ -2,9 +2,9 @@
 
 use TestCase;
 use Mockery as m;
-use App, Confide, Lang;
+use App, Confide, Lang, Mail;
 
-class UserControllerTest extends TestCase
+class UsersControllerTest extends TestCase
 {
     public function tearDown()
     {
@@ -14,7 +14,7 @@ class UserControllerTest extends TestCase
     public function testShouldCreate()
     {
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@create');
+        $this->action('GET', 'Pulse\Backend\UsersController@create');
 
         // Assertion
         $this->assertResponseOk();
@@ -40,11 +40,25 @@ class UserControllerTest extends TestCase
 
         App::instance('Pulse\User\Repository', $repo);
 
+        Mail::shouldReceive('send')
+            ->once()
+            ->andReturnUsing(function($a, $b, $closure){
+                $message = m::mock('MailMessage');
+
+                $message->shouldReceive('to')
+                    ->once()
+                    ->andReturn($message);
+
+                $message->shouldReceive('subject');
+
+                $closure($message);
+            });
+
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@store', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@store', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
     }
 
     public function testShouldNotStore()
@@ -68,16 +82,16 @@ class UserControllerTest extends TestCase
         App::instance('Pulse\User\Repository', $repo);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@store', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@store', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@create');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@create');
     }
 
     public function testShouldLogin()
     {
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@login');
+        $this->action('GET', 'Pulse\Backend\UsersController@login');
 
         // Assertion
         $this->assertResponseOk();
@@ -91,7 +105,7 @@ class UserControllerTest extends TestCase
             ->andReturn(m::mock('Pulse\User\User'));
 
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@login');
+        $this->action('GET', 'Pulse\Backend\UsersController@login');
 
         // Assertion
         $this->assertRedirectedTo('/');
@@ -115,7 +129,7 @@ class UserControllerTest extends TestCase
         App::instance('Pulse\User\Repository', $repo);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_login', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_login', [], $input);
 
         // Assertion
         $this->assertRedirectedTo('/');
@@ -142,10 +156,10 @@ class UserControllerTest extends TestCase
         App::instance('Pulse\User\Repository', $repo);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_login', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_login', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
     }
 
     public function testShouldNotLoginThrottled()
@@ -170,10 +184,10 @@ class UserControllerTest extends TestCase
         App::instance('Pulse\User\Repository', $repo);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_login', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_login', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
     }
 
     public function testShouldNotLoginNotConfirmed()
@@ -202,10 +216,10 @@ class UserControllerTest extends TestCase
         App::instance('Pulse\User\Repository', $repo);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_login', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_login', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
     }
 
     public function testShouldConfirm()
@@ -220,10 +234,10 @@ class UserControllerTest extends TestCase
             ->andReturn(true);
 
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@confirm', $wildcards);
+        $this->action('GET', 'Pulse\Backend\UsersController@confirm', $wildcards);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
         $this->assertSessionHas('notice');
     }
 
@@ -240,17 +254,17 @@ class UserControllerTest extends TestCase
             ->andReturn(false);
 
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@confirm', $wildcards);
+        $this->action('GET', 'Pulse\Backend\UsersController@confirm', $wildcards);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
         $this->assertSessionHas('error', $errorMsg);
     }
 
     public function testShouldForgotPassword()
     {
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@forgot_password');
+        $this->action('GET', 'Pulse\Backend\UsersController@forgot_password');
 
         // Assertion
         $this->assertResponseOk();
@@ -268,10 +282,10 @@ class UserControllerTest extends TestCase
             ->andReturn(true);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_forgot_password', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_forgot_password', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
         $this->assertSessionHas('notice');
     }
 
@@ -288,10 +302,10 @@ class UserControllerTest extends TestCase
             ->andReturn(false);
 
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_forgot_password', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_forgot_password', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@forgot_password');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@forgot_password');
         $this->assertSessionHas('error', $errorMsg);
     }
 
@@ -301,7 +315,7 @@ class UserControllerTest extends TestCase
         $wildcards = ['token'=>'123123'];
 
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@reset_password', $wildcards);
+        $this->action('GET', 'Pulse\Backend\UsersController@reset_password', $wildcards);
 
         // Assertion
         $this->assertResponseOk();
@@ -310,6 +324,7 @@ class UserControllerTest extends TestCase
     public function testShouldDoResetPassword()
     {
         // Set
+        $repo = m::mock('Pulse\User\Repository[resetPassword]');
         $input = [
             'token' => '123123',
             'password' => 'foobar1337',
@@ -317,20 +332,23 @@ class UserControllerTest extends TestCase
         ];
 
         // Expectation
-        Confide::shouldReceive('resetPassword')
+        $repo->shouldReceive('resetPassword')
             ->with($input)->once()
             ->andReturn(true);
 
+        App::instance('Pulse\User\Repository', $repo);
+
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_reset_password', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_reset_password', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@login');
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@login');
     }
 
     public function testShouldNotDoResetPasswordWrongToken()
     {
         // Set
+        $repo = m::mock('Pulse\User\Repository[resetPassword]');
         $input = [
             'token' => '123123',
             'password' => 'foobar1337',
@@ -338,15 +356,17 @@ class UserControllerTest extends TestCase
         ];
 
         // Expectation
-        Confide::shouldReceive('resetPassword')
+        $repo->shouldReceive('resetPassword')
             ->with($input)->once()
             ->andReturn(false);
 
+        App::instance('Pulse\User\Repository', $repo);
+
         // Request
-        $this->action('POST', 'Pulse\Backend\UserController@do_reset_password', [], $input);
+        $this->action('POST', 'Pulse\Backend\UsersController@do_reset_password', [], $input);
 
         // Assertion
-        $this->assertRedirectedToAction('Pulse\Backend\UserController@reset_password', ['token'=>'123123']);
+        $this->assertRedirectedToAction('Pulse\Backend\UsersController@reset_password', ['token'=>'123123']);
     }
 
     public function testShouldLogout()
@@ -356,7 +376,7 @@ class UserControllerTest extends TestCase
             ->once();
 
         // Request
-        $this->action('GET', 'Pulse\Backend\UserController@logout');
+        $this->action('GET', 'Pulse\Backend\UsersController@logout');
 
         // Assertion
         $this->assertRedirectedTo('/');

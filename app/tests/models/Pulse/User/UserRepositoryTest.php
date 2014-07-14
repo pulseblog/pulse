@@ -83,19 +83,76 @@ class RepositoryTest extends TestCase
             'remember'=> true
         ];
         $userMock = m::mock('user');
+        $userMock->confirmed = null;
 
         // Expectations
-        $userMock->shouldReceive('checkUserExists')
+        Confide::shouldReceive('getUserByEmailOrUsername')
             ->with($input)->once()
-            ->andReturn(true);
-
-        $userMock->shouldReceive('isConfirmed')
-            ->with($input)->once()
-            ->andReturn(false);
-
-        App::instance('Pulse\User\User', $userMock);
+            ->andReturn($userMock);
 
         // Assertion
         $this->assertTrue($repo->existsButNotConfirmed($input));
+    }
+
+    public function testNotExistsAndNotConfirmed()
+    {
+        // Set
+        $repo = App::make('Pulse\User\Repository');
+        $input = [
+            'email' => 'someone@something.com',
+            'password' => 'foobar1337',
+            'remember'=> true
+        ];
+
+        // Expectations
+        Confide::shouldReceive('getUserByEmailOrUsername')
+            ->with($input)->once()
+            ->andReturn(null);
+
+        // Assertion
+        $this->assertNull($repo->existsButNotConfirmed($input));
+    }
+
+    public function testShouldResetPassword()
+    {
+        // Set
+        $repo = App::make('Pulse\User\Repository');
+        $token = '1234';
+        $userMock = m::mock('Pulse\User\User[save]');
+        $input = [
+            'token' =>  $token,
+            'password' => 'secret',
+            'password_confirmation' => 'secret'
+        ];
+
+        // Expectations
+        Confide::shouldReceive('userByResetPasswordToken')
+            ->with($token)->once()
+            ->andReturn($userMock);
+
+        $userMock->shouldReceive('save')
+            ->once()
+            ->andReturnUsing(function() use ($userMock) {
+                return $userMock->password == 'secret' &&
+                    $userMock->password_confirmation == 'secret';
+            });
+
+        // Assertion
+        $this->assertTrue($repo->resetPassword($input));
+    }
+
+    public function testShouldSave()
+    {
+        // Set
+        $repo = App::make('Pulse\User\Repository');
+        $userMock = m::mock('Pulse\User\User');
+
+        // Expectations
+        $userMock->shouldReceive('save')
+            ->once()
+            ->andReturn(true);
+
+        // Assertion
+        $this->assertTrue($repo->save($userMock));
     }
 }
