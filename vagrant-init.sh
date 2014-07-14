@@ -57,7 +57,7 @@ EOF
 
 echo "--- Installing PHPUnit ---"
 mkdir /home/vagrant/.composer; cd /home/vagrant/.composer
-composer require 'phpunit/phpunit=3.7.*'
+composer require 'phpunit/phpunit=~4.0'
 sudo chown -R vagrant:vagrant /home/vagrant/.composer
 
 echo "--- Installing composer packages ---"
