@@ -35,8 +35,8 @@ Route::put('admin/post/{id}',       'Pulse\Backend\PostsController@update');
 Route::post('admin/post',           'Pulse\Backend\PostsController@store');
 
 // Confide routes
-Route::get( 'users/create',                 'Pulse\Backend\UsersController@create');
-Route::post('users',                        'Pulse\Backend\UsersController@store');
+//Route::get( 'users/create',                 'Pulse\Backend\UsersController@create');
+//Route::post('users',                        'Pulse\Backend\UsersController@store');
 Route::get( 'users/login',                  'Pulse\Backend\UsersController@login');
 Route::post('users/login',                  'Pulse\Backend\UsersController@do_login');
 Route::get( 'users/confirm/{code}',         'Pulse\Backend\UsersController@confirm');
