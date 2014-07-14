@@ -25,7 +25,7 @@ class UsersController extends Controller {
      */
     public function store()
     {
-        $repo = App::make('Pulse\User\UserRepository');
+        $repo = App::make('Pulse\User\Repository');
         $user = $repo->signup(Input::all());
 
         if ($user->id)
@@ -71,7 +71,7 @@ class UsersController extends Controller {
      */
     public function do_login()
     {
-        $repo = App::make('Pulse\User\UserRepository');
+        $repo = App::make('Pulse\User\Repository');
         $input = Input::all();
 
         if ($repo->login($input))
@@ -166,7 +166,7 @@ class UsersController extends Controller {
      */
     public function do_reset_password()
     {
-        $repo = App::make('Pulse\User\UserRepository');
+        $repo = App::make('Pulse\User\Repository');
         $input = array(
             'token'                 =>Input::get( 'token' ),
             'password'              =>Input::get( 'password' ),

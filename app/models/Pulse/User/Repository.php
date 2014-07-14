@@ -3,12 +3,12 @@
 use App, Config, Confide;
 
 /**
- * Class UserRepository
+ * Class Repository
  *
  * This service abstracts some interactions that occurs between Confide and
  * the Database.
  */
-class UserRepository
+class Repository
 {
     /**
      * Signup a new account with the given parameters
