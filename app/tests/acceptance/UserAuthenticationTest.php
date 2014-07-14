@@ -13,8 +13,6 @@ class UserAuthenticationTest extends AcceptanceTestCase {
      */
     public function testShouldLogin()
     {
-        $this->markTestIncomplete();
-
         // Given
         $this->site_has_user([
             'username' => 'Someone',
@@ -29,7 +27,7 @@ class UserAuthenticationTest extends AcceptanceTestCase {
         ]);
 
         // When
-        $this->i_visit_url('user/login');
+        $this->i_visit_url('users/login');
 
         // And
         $this->i_submit_form_with('form', [
