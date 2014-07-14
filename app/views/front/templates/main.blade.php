@@ -7,7 +7,7 @@
         <link rel="canonical" href="{{ Request::url() }}" />
         <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
         <link href="/favicon.ico" type="image/x-icon" rel="icon"/>
-
+        <title>{{ Config::get('pulse.blogname') }}{{ (Config::get('pulse.blogdesc') ? ' - '.Config::get('pulse.blogdesc') : '') }}</title>
         <link href="{{ asset('assets/css/front.css') }}" rel="stylesheet">
     </head>
 
