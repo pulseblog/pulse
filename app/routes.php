@@ -59,3 +59,15 @@ Route::post('users/forgot_password',        'Pulse\Backend\UsersController@do_fo
 Route::get( 'users/reset_password/{token}', 'Pulse\Backend\UsersController@reset_password');
 Route::post('users/reset_password',         'Pulse\Backend\UsersController@do_reset_password');
 Route::get( 'users/logout',                 'Pulse\Backend\UsersController@logout');
+
+/*
+|--------------------------------------------------------------------------
+| Errors
+|--------------------------------------------------------------------------
+|
+*/
+
+App::missing(function($exception)
+{
+    return Response::view('front.errors.404', array(), 404);
+});
