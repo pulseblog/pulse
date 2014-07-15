@@ -18,25 +18,39 @@ Route::get('{slug}',        'Pulse\Frontend\CmsController@showPost');
 |
 */
 
-Route::get('admin/pages',           'Pulse\Backend\PagesController@index');
-Route::get('admin/page/{id}',       'Pulse\Backend\PagesController@show');
-Route::get('admin/page/{id}/edit',  'Pulse\Backend\PagesController@edit');
-Route::get('admin/pages/create',    'Pulse\Backend\PagesController@create');
-Route::delete('admin/page/{id}',    'Pulse\Backend\PagesController@destroy');
-Route::put('admin/page/{id}',       'Pulse\Backend\PagesController@update');
-Route::post('admin/page',           'Pulse\Backend\PagesController@store');
+Route::group([
+    'before' => 'auth',
+    'prefix' => 'admin',
+    'namespace' => 'Pulse\Backend'
+    ],
+    function() {
+        Route::get(   'pages',          'PagesController@index');
+        Route::get(   'page/{id}',      'PagesController@show');
+        Route::get(   'page/{id}/edit', 'PagesController@edit');
+        Route::get(   'pages/create',   'PagesController@create');
+        Route::delete('page/{id}',      'PagesController@destroy');
+        Route::put(   'page/{id}',      'PagesController@update');
+        Route::post(  'page',           'PagesController@store');
 
-Route::get('admin/posts',           'Pulse\Backend\PostsController@index');
-Route::get('admin/post/{id}',       'Pulse\Backend\PostsController@show');
-Route::get('admin/post/{id}/edit',  'Pulse\Backend\PostsController@edit');
-Route::get('admin/posts/create',    'Pulse\Backend\PostsController@create');
-Route::delete('admin/post/{id}',    'Pulse\Backend\PostsController@destroy');
-Route::put('admin/post/{id}',       'Pulse\Backend\PostsController@update');
-Route::post('admin/post',           'Pulse\Backend\PostsController@store');
+        Route::get(   'posts',          'PostsController@index');
+        Route::get(   'post/{id}',      'PostsController@show');
+        Route::get(   'post/{id}/edit', 'PostsController@edit');
+        Route::get(   'posts/create',   'PostsController@create');
+        Route::delete('post/{id}',      'PostsController@destroy');
+        Route::put(   'post/{id}',      'PostsController@update');
+        Route::post(  'post',           'PostsController@store');
+    }
+);
 
-// Confide routes
-//Route::get( 'users/create',                 'Pulse\Backend\UsersController@create');
-//Route::post('users',                        'Pulse\Backend\UsersController@store');
+/*
+|--------------------------------------------------------------------------
+| Confide routes
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::get( 'users/create',                 'Pulse\Backend\UsersController@create');
+Route::post('users',                        'Pulse\Backend\UsersController@store');
 Route::get( 'users/login',                  'Pulse\Backend\UsersController@login');
 Route::post('users/login',                  'Pulse\Backend\UsersController@do_login');
 Route::get( 'users/confirm/{code}',         'Pulse\Backend\UsersController@confirm');
