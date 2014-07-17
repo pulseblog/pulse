@@ -5,15 +5,15 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "~4.2",
-		"dflydev/markdown": "1.0.*@dev",
-		"zizaco/confide": "4.0.*@dev",
-		"leroy-merlin-br/assetwatcher": "dev-master",
-		"leroy-merlin-br/larasniffer": "dev-master"
+		"dflydev/markdown": "~1.0",
+		"zizaco/confide": "~4.0",
+		"leroy-merlin-br/assetwatcher": "~1.0",
+		"leroy-merlin-br/larasniffer": "~1.0"
 	},
 	"require-dev": {
-		"mockery/mockery": "*",
-		"satooshi/php-coveralls": "dev-master",
-		"squizlabs/php_codesniffer": "1.*"
+		"mockery/mockery": "~0.9",
+		"satooshi/php-coveralls": "~0.7",
+		"squizlabs/php_codesniffer": "~1.5"
 	},
 	"autoload": {
 		"classmap": [
@@ -41,6 +41,11 @@
 	},
 	"config": {
 		"preferred-install": "dist"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
 	},
 	"minimum-stability": "dev"
 }
