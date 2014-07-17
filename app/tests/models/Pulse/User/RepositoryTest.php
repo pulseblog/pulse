@@ -130,6 +130,10 @@ class RepositoryTest extends TestCase
             ->with($token)->once()
             ->andReturn($userMock);
 
+        Confide::shouldReceive('destroyForgotPasswordToken')
+            ->with($token)->once()
+            ->andReturn(true);
+
         $userMock->shouldReceive('save')
             ->once()
             ->andReturnUsing(function() use ($userMock) {
