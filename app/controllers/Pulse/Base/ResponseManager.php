@@ -1,6 +1,7 @@
 <?php namespace Pulse\Base;
 
 use App;
+use Config;
 use Request;
 use Redirect;
 use Input;
@@ -15,6 +16,23 @@ use Illuminate\Support\Contracts\ArrayableInterface;
  * @package Pulse\Base
  */
 class ResponseManager {
+
+    /**
+     * Name of the template that is going to be used when rendering view.
+     * The template name will be appended to the $view variable received
+     * in the render method
+     * @var string
+     */
+    public $template;
+
+    /**
+     * Sets the template
+     */
+    public function __construct()
+    {
+        if (! Request::is('admin/*'))
+            $this->template = Config::get('pulse.template', 'front');
+    }
 
     /**
      * Builds a response using the view and the given data. It will primarily
@@ -33,7 +51,7 @@ class ResponseManager {
                 ->json($this->morphToArray($data));
         } else {
             $response = App::make('Response')
-                ->view($view, array_merge($data, $viewData));
+                ->view($this->template.'.'.$view, array_merge($data, $viewData));
         }
 
         return $response;

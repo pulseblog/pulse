@@ -3,6 +3,7 @@
 use TestCase;
 use Mockery as m;
 use App;
+use Config;
 use Request;
 
 class ResponseManagerTest extends TestCase
@@ -12,16 +13,47 @@ class ResponseManagerTest extends TestCase
         m::close();
     }
 
+    public function testShouldConstructWithTemplate()
+    {
+        // Set
+        Config::set('pulse.template', 'foobar');
+
+        // Expectation
+        Request::shouldReceive('is')
+            ->once()->with('admin/*')
+            ->andReturn(false);
+
+        // Assertion
+        $manager = App::make('Pulse\Base\ResponseManager');
+        $this->assertEquals('foobar', $manager->template);
+    }
+
+    public function testShouldConstructWithoutTemplate()
+    {
+        // Set
+        Config::set('pulse.template', 'foobar');
+
+        // Expectation
+        Request::shouldReceive('is')
+            ->once()->with('admin/*')
+            ->andReturn(true);
+
+        // Assertion
+        $manager = App::make('Pulse\Base\ResponseManager');
+        $this->assertEquals(null, $manager->template);
+    }
+
     public function testShouldRenderView()
     {
         // Set
         $manager = App::make('Pulse\Base\ResponseManager');
+        $manager->template = 'template';
         $responseFacade = m::mock();
         $params = ['foo'=>'bar'];
 
         // Expectation
         $responseFacade->shouldReceive('view')
-            ->with('name.of.file', $params)
+            ->with('template.name.of.file', $params)
             ->andReturn('<div>RenderedView</div>');
 
         App::instance('Response', $responseFacade);

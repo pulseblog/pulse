@@ -27,7 +27,7 @@ class CmsController extends BaseController
         $repo  = App::make('Pulse\Cms\PostRepository');
         $posts = $repo->all($page);
 
-        return $this->render('front.posts.index', compact('posts'));
+        return $this->render('posts.index', compact('posts'));
     }
 
     /**
@@ -46,7 +46,7 @@ class CmsController extends BaseController
             $postPresenter = App::make('Pulse\Cms\Presenter');
             $postPresenter->setInstance($post);
 
-            return $this->render('front.posts.show', compact('postPresenter', 'post'));
+            return $this->render('posts.show', compact('postPresenter', 'post'));
         } else {
             App::abort(404);
         }
@@ -68,7 +68,7 @@ class CmsController extends BaseController
             $pagePresenter = App::make('Pulse\Cms\Presenter');
             $pagePresenter->setInstance($page);
 
-            return $this->render('front.pages.show', compact('pagePresenter'));
+            return $this->render('pages.show', compact('pagePresenter'));
         } else {
             App::abort(404);
         }
