@@ -65,7 +65,7 @@ small {
 
 p {
     text-align: justify;
-    margin: 0px 0 40px;
+    margin: 20px 0;
     line-height: 1.6em;
 }
 
@@ -95,18 +95,29 @@ hr {
     border: solid 2px @colorPastel;
 }
 
-pre, code {
+pre{
     font-family: monospace;
     font-size: 14px;
     background-color: @colorBlack;
     color: @colorWhite;
+    padding: 10px;
     opacity: 0.8;
-    padding: 5px;
     margin: 5px 0;
+    overflow: auto;
 
     &.is-inline {
         display: inline;
     }
+}
+
+code {
+    font-family: monospace;
+    font-size: 14px;
+}
+
+p > code {
+    background-color: @colorPastel;
+    color: @colorLightGray;
 }
 
 blockquote {

@@ -225,7 +225,7 @@ small {
 }
 p {
   text-align: justify;
-  margin: 0px 0 40px;
+  margin: 20px 0;
   line-height: 1.6em;
 }
 a {
@@ -253,19 +253,26 @@ em {
 hr {
   border: solid 2px #dddddd;
 }
-pre,
-code {
+pre {
   font-family: monospace;
   font-size: 14px;
   background-color: #000000;
   color: #ffffff;
+  padding: 10px;
   opacity: 0.8;
-  padding: 5px;
   margin: 5px 0;
+  overflow: auto;
 }
-pre.is-inline,
-code.is-inline {
+pre.is-inline {
   display: inline;
+}
+code {
+  font-family: monospace;
+  font-size: 14px;
+}
+p > code {
+  background-color: #dddddd;
+  color: #666666;
 }
 blockquote {
   display: block;
