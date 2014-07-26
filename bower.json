@@ -4,7 +4,8 @@
   "description": "A blogging platform made with Laravel",
   "dependencies": {
     "jquery": "~2.1",
-    "screenfull": "~1.1"
+    "screenfull": "~1.1",
+    "prism": "gh-pages"
   },
   "authors": [
     "Zizaco",
